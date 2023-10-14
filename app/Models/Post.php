@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    /**
+     * Get the route key for the model.
+    */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
