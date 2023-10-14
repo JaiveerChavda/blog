@@ -1,13 +1,9 @@
-<x-layout>
-    @foreach ($posts as $post)
-        <article>
+<!DOCTYPE html>
 
-            <a href="posts/{{ $post->slug }}">
-                <h1>{!! $post->title !!} </h1>
-            </a>
-            <div>
-                {{ $post->excerpt }}
-            </div>
-        </article>
-    @endforeach
-</x-layout>
+<title>My Blog</title>
+
+<link rel="stylesheet" href="/app.css">
+
+<body>
+    <h1>welcome</h1>
+</body>
