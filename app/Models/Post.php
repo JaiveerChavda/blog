@@ -10,6 +10,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $with = ['author','category'];
+
     /**
      * Get the route key for the model.
     */
