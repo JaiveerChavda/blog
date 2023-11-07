@@ -12,17 +12,12 @@
         <div class="mt-8 flex flex-col justify-between">
             <header>
                 <div class="space-x-2">
-                    <a href="categories/{{$post->category->slug}}"
-                        class="border border-blue-300 px-3 py-1 rounded-full text-blue-300 uppercase"
-                        style="font-size: 10px;"
-                        >
-                        {{$post->category->name}}
-                    </a>
+                    <x-category-button :category="$post->category" />
                 </div>
 
                 <div class="mt-4">
                     <h1 class="text-3xl">
-                    <a href="/post/{{$post->slug}}">
+                    <a href="/posts/{{$post->slug}}">
                         {{$post->title}}
                     </a>
                     </h1>
@@ -43,7 +38,7 @@
                     </div>
                 </div>
                 <div class="hidden lg:block">
-                    <a href="/post/{{$post->slug}}" class="text-xs font-semibold bg-gray-200 px-8 py-2 rounded-full">Read More</a>
+                    <a href="/posts/{{$post->slug}}" class="text-xs font-semibold bg-gray-200 px-8 py-2 rounded-full">Read More</a>
                 </div>
             </footer>
         </div>
