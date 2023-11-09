@@ -22,7 +22,7 @@ Route::get('/', function () {
         'posts' => $posts,
         'categories' => Category::all()
     ]);
-});
+})->name('home');
 
 Route::get('/posts/{post}',function(Post $post) {
 
