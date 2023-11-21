@@ -7,32 +7,7 @@
         <div class="tw-flex tw-justify-center mt-4 space-y-2 lg:space-y-0 lg:space-x-4">
             <!-- Category -->
             <div class="relative lg:inline-flex bg-gray-100 rounded-xl">
-                <x-dropdown>
-
-                    {{-- trigger for displaying drop down link --}}
-                    <x-slot name="trigger">
-                        <button
-                            class="py-2 pl-3 pr-9 text-sm font-semibold
-                                w-full lg:w-32 text-left flex lg:inline-flex"
-                        >
-
-                            {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
-
-                            <x-icon name="down-arrow" class="absolute pointer-events-none"  style="right: 12px;"/>
-                        </button>
-                    </x-slot>
-
-                    {{-- drop down content(links) by default it will go into slot --}}
-
-                    <x-dropdown-item href="/" :active="request()->routeIs('home')"> All </x-dropdown-item>
-
-                    @foreach ($categories as $category)
-                    <x-dropdown-item
-                        href="/?category={{$category->slug}}"
-                        :active="request()->is('categories/'.$category->slug)"
-                    >{{ ucwords($category->name) }}</x-dropdown-item>
-                    @endforeach
-                </x-dropdown>
+                <x-category-dropdown/>
             </div>
 
 
