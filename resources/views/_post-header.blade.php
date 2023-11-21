@@ -16,7 +16,7 @@
                                 w-full lg:w-32 text-left flex lg:inline-flex"
                         >
 
-                            {{ isset($currentCategory) ? $currentCategory->name : 'Categories' }}
+                            {{ isset($currentCategory) ? ucwords($currentCategory->name) : 'Categories' }}
 
                             <x-icon name="down-arrow" class="absolute pointer-events-none"  style="right: 12px;"/>
                         </button>
@@ -28,7 +28,7 @@
 
                     @foreach ($categories as $category)
                     <x-dropdown-item
-                        href="/categories/{{$category->slug}}"
+                        href="/?category={{$category->slug}}"
                         :active="request()->is('categories/'.$category->slug)"
                     >{{ ucwords($category->name) }}</x-dropdown-item>
                     @endforeach
