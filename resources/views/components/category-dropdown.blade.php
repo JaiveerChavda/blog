@@ -20,7 +20,7 @@
     @foreach ($categories as $category)
     <x-dropdown-item
         href="/?category={{$category->slug}}"
-        :active="request()->is('?category='.$category->slug)"
+        :active="$category->is($currentCategory)"
     >{{ ucwords($category->name) }}</x-dropdown-item>
     @endforeach
 </x-dropdown>
