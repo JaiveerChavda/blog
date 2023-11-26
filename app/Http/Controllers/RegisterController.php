@@ -24,6 +24,6 @@ class RegisterController extends Controller
 
         User::create($attributes);
 
-        dd('validation success');
+        return redirect('/');
     }
 }
