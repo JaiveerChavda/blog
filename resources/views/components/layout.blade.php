@@ -18,12 +18,26 @@
                     <img src="/images/logo.svg" alt="laracasts logo" width="165" height="16">
                 </a>
             </div>
-            <div class="mt-8 md:mt-0">
-                <a href="/" class="text-xs text-black font-bold uppercase">Home Page</a>
+            <div class="mt-8 md:mt-0 flex items-center">
+                @auth
+                    <span class="text-xs text-black font-bold uppercase"> Welcome, {{ auth()->user()->name}}!</span>
+
+                    <form action="/logout" method="POST" class="ml-6">
+                        @csrf
+                        <button class="text-sm text-blue-500 font-semibold">Log Out</button>
+                    </form>
+                @else
+                    <a href="/register" class="text-xs text-black font-bold uppercase">Register</a>
+                    <a href="/login" class="ml-6 text-xs text-black font-bold uppercase">Log In</a>
+                @endauth
                 <a href=""
-                    class="text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full ml-3">Subscribe
+                    class="text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full ml-3"
+                >
+                    Subscribe
                     for
-                    Updates</a>
+                    Updates
+                </a>
+
             </div>
         </nav>
 
