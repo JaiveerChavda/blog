@@ -10,6 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js"></script>
 
+<style>
+html{
+    scroll-behavior: smooth;
+}
+</style>
+
 <body style="font-family:Open Sans,sans-serif;">
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
@@ -30,7 +36,7 @@
                     <a href="/register" class="text-xs text-black font-bold uppercase">Register</a>
                     <a href="/login" class="ml-6 text-xs text-black font-bold uppercase">Log In</a>
                 @endauth
-                <a href=""
+                <a href="#subscribe"
                     class="text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full ml-3"
                 >
                     Subscribe
@@ -59,7 +65,7 @@
                                 class="lg:bg-transparent pl-4 focus-within:outline-none">
                         </div>
 
-                        <button type="submit" class="hover:bg-blue-600 mt-4 lg:mt-0 text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full lg:ml-3">Subscribe</button>
+                        <button type="submit" id="subscribe" class="hover:bg-blue-600 mt-4 lg:mt-0 text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full lg:ml-3">Subscribe</button>
                     </form>
                 </div>
             </div>

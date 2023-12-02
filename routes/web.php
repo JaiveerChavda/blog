@@ -17,3 +17,19 @@ Route::post('/register',[RegisterController::class,'store'])->middleware('guest'
 Route::post('/logout',[SessionController::class,'destroy']);
 Route::get('login',[SessionController::class,'create']);
 Route::post('login',[SessionController::class,'store']);
+
+Route::get('ping',function(){
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us8',
+    ]);
+
+    $response = $mailchimp->lists->addListMember('b7f782816d',[
+        'email_address' => 'jayveersinhchavda555@gmail.com',
+        'status' => 'subscribed'
+    ]);
+
+    ddd($response);
+});
