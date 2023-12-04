@@ -12,6 +12,7 @@ class NewsletterController extends Controller
     /**
      * Handle the incoming request.
      */
+    // $newsletter = new Newsletter(Apiclient $client,!!?); // laravel automatic resolution.
     public function __invoke(Newsletter $newsletter)
     {
         request()->validate([
