@@ -7,7 +7,7 @@
             id="{{$name}}"
             required
     >
-        {{ trim(old($name))}}
+        {{$slot ?? old($name)}}
     </textarea>
 
     <x-forms.error name="{{$name}}"/>

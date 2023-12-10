@@ -33,10 +33,6 @@ class SessionController extends Controller
             'email'=>'your provided credentials could not be verified.'
         ]);
 
-        //1st and basic way to flash validation error
-        // return back()
-        //         ->withInput()
-        //         ->withErrors(['email'=>'your provided credentials could not be verified.']);
     }
 
     public function destroy()

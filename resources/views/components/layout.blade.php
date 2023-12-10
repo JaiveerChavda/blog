@@ -31,8 +31,8 @@ html{
                             <button class="text-xs text-black font-bold uppercase"> Welcome, {{ auth()->user()->name}}!</button>
                         </x-slot>
 
-                        <x-dropdown-item href='/admin/dashboard' :active="request()->is('/admin/dashboard')"> Dashboard </x-dropdown-item>
-                        <x-dropdown-item href='/admin/posts/create' :active="request()->is('admin/posts/create')"
+                        <x-dropdown-item href='/admin/posts' :active="request()->is('/admin/posts')"> Dashboard </x-dropdown-item>
+                        <x-dropdown-item href='/admin/create/posts' :active="request()->is('admin/create/posts')"
                             > New Post </x-dropdown-item>
                         <x-dropdown-item href='#' x-data="{}" @click.prevent="document.querySelector('#logout-user').submit()">Log Out</x-dropdown-item>
                         <form action="/logout" method="POST" class="hidden" id="logout-user">
