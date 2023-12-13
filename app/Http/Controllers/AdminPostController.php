@@ -18,7 +18,7 @@ class AdminPostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        return view('admin.posts.create');
     }
 
     public function store()
@@ -34,9 +34,7 @@ class AdminPostController extends Controller
 
         $attributes['user_id'] = auth()->user()->id;
 
-        $path = request()->file('thumbnail')->store('thumbnails');
-
-        $attributes['thumbnail'] = $path;
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
         Post::create($attributes);
 

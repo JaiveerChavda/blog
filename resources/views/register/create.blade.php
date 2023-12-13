@@ -6,93 +6,28 @@
                 <form method="POST" action="/register" class="mt-10">
 
                     @csrf
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="name">
-                            name
-                        </label>
+                    <x-forms.field>
+                        <x-forms.input name='name' required/>
+                    </x-forms.field>
 
-                        <input type="text"
-                               class="border border-gray-400 p-2 w-full"
-                               name="name"
-                               id="name"
-                               value="{{ old('name') }}"
-                               required
-                        >
+                    <x-forms.field>
+                        <x-forms.input name='username' required/>
+                    </x-forms.field>
 
-                        @error('name')
-                            <p class="text-red-500 text-xs font-semibold mt-1">{{ $message }}</p>
-                        @enderror
+                    <x-forms.field>
+                        <x-forms.input name='email'  required/>
+                    </x-forms.field>
 
-                    </div>
+                    <x-forms.field>
+                        <x-forms.input type='password' name='password' required/>
+                    </x-forms.field>
 
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="username">
-                            Username
-                        </label>
+                    {{-- submit button --}}
 
-                        <input type="text"
-                               class="border border-gray-400 p-2 w-full"
-                               name="username"
-                               id="username"
-                               value="{{ old('username') }}"
-                               required
-                        >
+                    <x-forms.field>
+                        <x-forms.button> Submit </x-forms.button>
+                    </x-forms.field>
 
-                        @error('username')
-                            <p class="text-red-500 text-xs font-semibold mt-1">{{ $message }}</p>
-                        @enderror
-
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="email">
-                            email
-                        </label>
-
-                        <input type="email"
-                               class="border border-gray-400 p-2 w-full"
-                               name="email"
-                               id="email"
-                               value="{{ old('email') }}"
-                               required
-                        >
-
-                        @error('email')
-                            <p class="text-red-500 text-xs font-semibold mt-1">{{ $message }}</p>
-                        @enderror
-
-                    </div>
-
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
-                            for="password">
-                            password
-                        </label>
-
-                        <input type="password"
-                               class="border border-gray-400 p-2 w-full"
-                               name="password"
-                               id="password"
-                               required
-                        >
-
-                        @error('password')
-                            <p class="text-red-500 text-xs font-semibold mt-1">{{ $message }}</p>
-                        @enderror
-
-                    </div>
-
-                    {{-- submit form --}}
-                    <div class="mb-6">
-                        <button type="submit"
-                                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"
-                        >
-                            Submit
-                        </button>
-                    </div>
                 </form>
         </main>
     </section>
