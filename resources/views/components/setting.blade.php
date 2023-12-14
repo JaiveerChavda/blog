@@ -19,7 +19,7 @@
                 </li>
                 <li>
                     <a href="/admin/create/posts"
-                        class="{{request()->is('admin/posts/create') ? 'text-blue-500' : ''}}"
+                        class="{{request()->is('admin/create/posts') ? 'text-blue-500' : ''}}"
                         >New post
                     </a>
                 </li>
