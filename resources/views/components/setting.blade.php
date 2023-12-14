@@ -12,14 +12,14 @@
 
             <ul>
                 <li>
-                    <a href="/admin/posts"
-                        class="{{request()->is('admin/posts') ? 'text-blue-500' : ''}}"
+                    <a href="{{ route('admin.posts.index') }}"
+                        class="{{request()->routeIs('admin.posts.index') ? 'text-blue-500' : ''}}"
                         >All Posts
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/create/posts"
-                        class="{{request()->is('admin/create/posts') ? 'text-blue-500' : ''}}"
+                    <a href=" {{ route('admin.posts.create') }}"
+                        class="{{request()->routeIs('admin.posts.create') ? 'text-blue-500' : ''}}"
                         >New post
                     </a>
                 </li>
