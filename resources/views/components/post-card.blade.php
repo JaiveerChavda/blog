@@ -7,7 +7,7 @@
     <div class="py-6 px-5">
         <div>
             {{-- TO DO --}}
-            <img src="{{asset('/storage'.'/'.$post->thumbnail)}}" alt="laracasts blog illustration-1" class="rounded-xl" >
+            <img src="{{ $post->thumbnail }}" alt="laracasts blog illustration-1" class="rounded-xl" >
         </div>
         <div class="mt-8 flex flex-col justify-between">
             <header>

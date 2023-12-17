@@ -22,8 +22,10 @@ class PostFactory extends Factory
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'slug' => $this->faker->slug(),
+            'thumbnail' => $this->faker->imageUrl(),
             'title' => $this->faker->sentence(),
             'excerpt' => '<p>' . implode('</p><p>',$this->faker->paragraphs(2)) . '</p>',
+            'published_at' => $this->faker->dateTimeBetween('-1 month','+2 months'),
             'body' => '<p>' . implode('</p><p>',$this->faker->paragraphs(6)) . '</p>',
         ];
     }

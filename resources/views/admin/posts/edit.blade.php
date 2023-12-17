@@ -12,7 +12,7 @@
                         <x-forms.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
                     </div>
 
-                    <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="" class="rounded-xl ml-6" width="100">
+                    <img src="{{ $post->thumbnail }}" alt="" class="rounded-xl ml-6" width="100">
                 </div>
 
 
