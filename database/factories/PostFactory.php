@@ -27,6 +27,7 @@ class PostFactory extends Factory
             'excerpt' => '<p>' . implode('</p><p>',$this->faker->paragraphs(2)) . '</p>',
             'published_at' => $this->faker->dateTimeBetween('-1 month','+2 months'),
             'body' => '<p>' . implode('</p><p>',$this->faker->paragraphs(6)) . '</p>',
+            'status' => $this->faker->randomElement(['draft','published']),
         ];
     }
 }
