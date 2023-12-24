@@ -19,6 +19,14 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <span
+                                                class="px-3 rounded-2xl py-1 text-xs font-semibold {{ $post->status == 'published' ? 'bg-green-300' : 'bg-red-300' }} "
+                                            >
+                                            {{ $post->status }}
+                                        </span>
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <a href="{{ route('admin.posts.edit',[$post]) }}" class="text-blue-500 hover:text-blue-600">Edit</a>
                                         </td>
 

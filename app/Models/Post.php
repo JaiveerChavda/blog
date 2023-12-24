@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,6 +33,15 @@ class Post extends Model
                 $query->where('username',$author)
                 )
         );
+    }
+
+     /**
+     * Filter posts by published status
+    */
+
+    public function scopePublished($query)
+    {
+        $query->where('status',PostStatus::PUBLISHED);
     }
 
 

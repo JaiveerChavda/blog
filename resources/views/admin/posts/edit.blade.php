@@ -12,7 +12,7 @@
                         <x-forms.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
                     </div>
 
-                    <img src="{{ $post->thumbnail }}" alt="" class="rounded-xl ml-6" width="100">
+                    <img src="/storage/{{$post->thumbnail}}" alt="" class="rounded-xl ml-6" width="100">
                 </div>
 
 
@@ -38,6 +38,26 @@
                 </select>
 
                 <x-forms.error name='category_id'/>
+            </x-forms.field>
+
+            <x-forms.field>
+                <x-forms.label name='status' />
+
+                <input type="radio"
+                    name="status"
+                    {{ $post->status == 'published' ? 'checked' : ''}}
+                    value="published"
+                    id="status"
+                >
+                <label for="published" class="mr-1">Published</label>
+
+                <input type="radio"
+                    name="status"
+                    {{ $post->status == 'draft' ? 'checked' : ''}}
+                    value="draft"
+                    id="status"
+                >
+                <label for="draft" class="mr-1">Draft</label>
             </x-forms.field>
 
             <x-forms.field>

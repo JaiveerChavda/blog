@@ -13,14 +13,22 @@ class PostController extends Controller
     public function index()
     {
         return view('posts.index', [
-            'posts' => Post::latest()->filter(
+            'posts' => Post::query()
+                ->latest()
+                ->published()
+                ->filter(
                 request(['search','category','author'])
-                )->paginate(6)->withQueryString(),
+                )->paginate(6)
+                ->withQueryString(),
         ]);
     }
 
     public function show(Post $post)
     {
+        //show 404 response if post is in draft mode
+
+        abort_if($post->status == 'draft',404);
+
         return view('posts.show', [
             'post' => $post
         ]);
