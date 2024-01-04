@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -35,6 +36,7 @@ class AdminPostController extends Controller
     public function edit(Post $post)
     {
         return view('admin.posts.edit',[
+            'authors' => User::all(['id','name']),
             'post' => $post,
         ]);
     }
@@ -70,7 +72,8 @@ class AdminPostController extends Controller
             'excerpt' => ['required'],
             'body' => ['required'],
             'category_id' => ['required',Rule::exists('categories','id')],
-            'status' => ['required']
+            'status' => ['required'],
+            'user_id' => $post->exists ? ['required',Rule::exists('users','id')] : ['nullable'],
         ]);
     }
 }

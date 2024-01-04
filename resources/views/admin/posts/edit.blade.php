@@ -61,6 +61,24 @@
             </x-forms.field>
 
             <x-forms.field>
+
+                <x-forms.label name='author'/>
+
+                <select name="user_id" id="user_id">
+                    @foreach ($authors as $user)
+                        <option value="{{ $user->id }}"
+                            {{ $post->author->id == $user->id ? 'selected' : '' }}
+                            class="{{ $post->author->id == $user->id ? 'bg-blue-500 text-white' : '' }}"
+                            >
+                            {{ $user->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <x-forms.error name='user_id'/>
+            </x-forms.field>
+
+            <x-forms.field>
                 <x-forms.button>
                     Update
                 </x-forms.button>
