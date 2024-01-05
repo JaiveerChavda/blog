@@ -6,12 +6,18 @@ use App\Enums\PostStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
-class Post extends Model
+class Post extends Model implements Feedable
 {
     use HasFactory;
 
     protected $with = ['author','category'];
+
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
 
     public function scopeFilter($query,array $filters)
     {
@@ -66,5 +72,28 @@ class Post extends Model
     public function author()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+        ->id($this->id)
+        ->title($this->title)
+        ->summary($this->excerpt)
+        ->updated($this->published_at)
+        ->link($this->getLink())
+        ->authorName($this->author->name)
+        ->authorEmail($this->author->email);
+    }
+
+    public static function getFeedItems()
+    {
+        return static::query()->published()->latest()->get();
+    }
+
+    //get the link to show in rss feed
+    public function getLink()
+    {
+        return route('post.show-feed',$this);
     }
 }

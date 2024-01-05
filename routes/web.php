@@ -12,7 +12,9 @@ use Illuminate\Validation\ValidationException;
 
 Route::get('/', [PostController::class,'index'])->name('home');
 
-Route::get('/posts/{post}', [PostController::class,'show']);
+Route::get('/posts/{post}', [PostController::class,'show'])->name('post.show');
+Route::get('post-feed/{post}',[PostController::class,'showPostsFeed'])->name('post.show-feed');
+
 Route::post('/posts/{post:slug}/comments', [PostCommentController::class,'store']); //store post comment's
 
 Route::post('newsletter',NewsletterController::class);
@@ -27,3 +29,7 @@ Route::post('login', [SessionController::class,'store']);
 Route::middleware('can:admin')->prefix('admin')->name('admin.')->group( function () {
     Route::resource('posts',AdminPostController::class)->except('show');
 });
+
+
+// In routes/web.php
+Route::feeds();

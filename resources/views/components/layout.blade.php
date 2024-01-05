@@ -4,6 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="alternate" type="application/atom+xml" title="News" href="/blog-feeds">
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -17,6 +18,7 @@ html{
 </style>
 
 <body style="font-family:Open Sans,sans-serif;">
+    @include('feed::links')
     <section class="px-6 py-8">
         <nav class="md:flex md:justify-between md:items-center">
             <div>

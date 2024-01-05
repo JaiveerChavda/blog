@@ -1,6 +1,8 @@
 laracasts the path blog project for practise using laravel version 8 
 laravel 8 from scratch.
 
+https://github.com/JeffreyWay/Laravel-From-Scratch-Blog-Project
+
 next steps to follow:
 
 1-complete some lessons given by jeff. from github repo link.

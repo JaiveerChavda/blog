@@ -34,4 +34,9 @@ class PostController extends Controller
         ]);
     }
 
+    public function showPostsFeed(Post $post)
+    {
+        return $post;
+    }
+
 }
