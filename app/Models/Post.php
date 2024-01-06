@@ -94,6 +94,6 @@ class Post extends Model implements Feedable
     //get the link to show in rss feed
     public function getLink()
     {
-        return route('post.show-feed',$this);
+        return route('post.show',$this);
     }
 }
