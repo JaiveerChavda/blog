@@ -9,13 +9,24 @@
                             Published <time>{{$post->created_at->diffForHumans()}}</time>
                         </p>
 
-                        <div class="flex items-center lg:justify-center text-sm mt-4">
+                        <div class="flex items-center lg:justify-start text-sm mt-4">
                             <img src="/images/lary-avatar.svg" alt="Lary avatar">
                             <div class="ml-3 text-left">
                                 <h5 class="font-bold">
                                     <a href="/?author={{$post->author->username}}">{{$post->author->name}}</a>
                                 </h5>
                             </div>
+                            @auth
+                                @if (auth()->id() != $post->author->id)
+                                    @if (in_array(auth()->id(),$post->author->followers->pluck('id')->toArray()))
+                                    <a href="{{ route('unfollow.author',[$post->author->username])}}"
+                                        class="bg-red-500 py-1 rounded-2xl text-white ml-auto px-5 text-sm font-bold">UnFollow</a>
+                                    @else
+                                    <a href="{{ route('follow.author',[$post->author->username])}}"
+                                        class="bg-blue-500 py-1 rounded-2xl text-white ml-auto px-5 text-sm font-bold">Follow</a>
+                                    @endif
+                                @endif
+                            @endauth
                         </div>
                     </div>
 

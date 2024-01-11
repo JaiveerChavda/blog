@@ -40,4 +40,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    //get all the followers of the author
+    public function followers()
+    {
+        return $this->belongsToMany(User::class,'author_followers','author_id')->withTimestamps();
+    }
+
+    //get all the followings of a user (list of author a user follows)
+    public function followings()
+    {
+        return $this->belongsToMany(User::class,'author_followers','user_id','author_id')->orderByPivot('created_at','desc');
+    }
 }

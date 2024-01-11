@@ -6,6 +6,7 @@ use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
 use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
@@ -30,6 +31,8 @@ Route::middleware('can:admin')->prefix('admin')->name('admin.')->group( function
     Route::resource('posts',AdminPostController::class)->except('show');
 });
 
+Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
+Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
 
 // In routes/web.php
 Route::feeds();
