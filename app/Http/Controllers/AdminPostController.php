@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PostStatus;
+use App\Events\PostPublished as EventsPostPublished;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\PostPublished;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
@@ -24,13 +29,17 @@ class AdminPostController extends Controller
 
     public function store()
     {
-        Post::create(array_merge($this->validatePost(), [
+        $post = Post::create(array_merge($this->validatePost(), [
             'user_id' => request()->user()->id,
             'thumbnail' =>  request()->file('thumbnail')->store('thumbnails'),
          ]
         ));
 
-        return redirect('/');
+        if ($post->status == PostStatus::PUBLISHED->value) {
+            event(new EventsPostPublished($post));
+        }
+
+        return redirect('/')->with('success','post published successfuly');
     }
 
     public function edit(Post $post)

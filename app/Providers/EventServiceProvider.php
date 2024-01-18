@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\PostPublished;
 use App\Events\PostViewed;
 use App\Listeners\IncrementPostViewCount;
+use App\Listeners\SendPostPublishNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         PostViewed::class => [
             IncrementPostViewCount::class,
         ],
+        PostPublished::class => [
+            SendPostPublishNotification::class,
+        ]
     ];
 
     /**

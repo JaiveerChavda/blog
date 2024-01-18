@@ -6,15 +6,14 @@ https://github.com/JeffreyWay/Laravel-From-Scratch-Blog-Project
 next steps to follow:
 
 1-complete some lessons given by jeff. from github repo link.
-2-Queue
-3-Events
+2-Queue - done
+3-Events - done
 4-Compiling assets
-5-advanced eloquent relation ships
+5-advanced eloquent relation ships - done
 6-artisan commands
 7-Http Tests
-8-Notifications 
+8-Notifications - done
 9- eloquent - API Resource.
-post with et as title text - 21
 
 TODO:
 Of course we only had time in the Laravel From Scratch series to review the essentials of a blogging platform. You can certainly take this many steps further. Here are some quick ideas that you might play with.
