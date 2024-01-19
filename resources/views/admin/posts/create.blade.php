@@ -35,27 +35,17 @@
             </x-forms.field>
 
             <x-forms.field>
-                <x-forms.label name='status' />
-
-                <input type="radio"
-                    name="status"
-                    value="published"
-                    id="status"
-                >
-                <label for="published" class="mr-1">Published</label>
-
-                <input type="radio"
-                    name="status"
-                    value="draft"
-                    id="status"
-                >
-                <label for="draft" class="mr-1">Draft</label>
-            </x-forms.field>
-
-            <x-forms.field>
                 <x-forms.button>
                     Publish
                 </x-forms.button>
+
+                <button type="submit"
+                        name="action"
+                        value="save_as_draft"
+                        class="bg-yellow-400 ml-1.5 text-white px-10 py-2 rounded-2xl text-xs font-semibold hover:bg-yellow-500 uppercase"
+                >
+                    Save as Draft
+                </button>
             </x-forms.field>
 
         </form>

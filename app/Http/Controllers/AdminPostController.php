@@ -10,6 +10,7 @@ use App\Notifications\PostPublished;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
@@ -18,7 +19,7 @@ class AdminPostController extends Controller
     public function index()
     {
         return view('admin.posts.index',[
-            'posts' => Post::paginate(50)
+            'posts' => Post::latest()->paginate(50)
         ]);
     }
 
@@ -27,19 +28,34 @@ class AdminPostController extends Controller
         return view('admin.posts.create');
     }
 
+    //publish the given post
+
     public function store()
     {
-        $post = Post::create(array_merge($this->validatePost(), [
-            'user_id' => request()->user()->id,
-            'thumbnail' =>  request()->file('thumbnail')->store('thumbnails'),
-         ]
-        ));
+        if (request('action') == 'save_as_draft') {
 
-        if ($post->status == PostStatus::PUBLISHED->value) {
+            $post = Post::create(array_merge($this->validatePost(), [
+                'user_id' => request()->user()->id,
+                'thumbnail' =>  request()->file('thumbnail')->store('thumbnails'),
+                'status' => PostStatus::DRAFT->value,
+             ]
+            ));
+
+            return Redirect::route('admin.posts.index')->with('success','post saved as draft');
+
+        }else{
+            $post = Post::create(array_merge($this->validatePost(), [
+                'user_id' => request()->user()->id,
+                'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
+                'status' => PostStatus::PUBLISHED->value,
+                'published_at' => now(),
+            ]
+            ));
+
             event(new EventsPostPublished($post));
-        }
 
-        return redirect('/')->with('success','post published successfuly');
+            return redirect('/')->with('success','post published successfuly');
+        }
     }
 
     public function edit(Post $post)
@@ -59,6 +75,13 @@ class AdminPostController extends Controller
         }
 
         $post->update($attributes);
+
+        if($attributes['status'] == PostStatus::PUBLISHED->value && $post->published_at == null)
+        {
+            $post->published_at = now();
+            $post->save();
+            event(new EventsPostPublished($post));
+        }
 
         return back()->with('success','post updated');
     }
@@ -81,7 +104,7 @@ class AdminPostController extends Controller
             'excerpt' => ['required'],
             'body' => ['required'],
             'category_id' => ['required',Rule::exists('categories','id')],
-            'status' => ['required'],
+            'status' => $post->exists ? ['required'] : ['nullable'],
             'user_id' => $post->exists ? ['required',Rule::exists('users','id')] : ['nullable'],
         ]);
     }
