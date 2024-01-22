@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
@@ -33,6 +34,11 @@ Route::middleware('can:admin')->prefix('admin')->name('admin.')->group( function
 
 Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
 Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
+
+Route::get('followers',[UserController::class,'followers']);
+Route::get('followings',[UserController::class,'followings']);
+
+Route::get('remove/{follower}',[UserController::class,'remove']);
 
 // In routes/web.php
 Route::feeds();

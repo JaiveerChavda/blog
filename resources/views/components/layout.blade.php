@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.2/dist/cdn.min.js"></script>
-
+<script src="https://kit.fontawesome.com/9f1794eeb4.js" crossorigin="anonymous"></script>
 <style>
 html{
     scroll-behavior: smooth;
@@ -30,7 +30,7 @@ html{
                 @auth
                     <x-dropdown>
                         <x-slot name='trigger'>
-                            <button class="text-xs text-black font-bold uppercase"> Welcome, {{ auth()->user()->name}}!</button>
+                            <button class="text-xs text-black font-bold uppercase"> Hello, {{ auth()->user()->name}}!</button>
                         </x-slot>
 
                         @admin('admin')
@@ -39,6 +39,9 @@ html{
                             > New Post </x-dropdown-item>
                         @endadmin
 
+                    <x-dropdown-item href='/profile'>Profile</x-dropdown-item>
+                    <x-dropdown-item href='/followers'>Followers</x-dropdown-item>
+                    <x-dropdown-item href='/followings'>Followings</x-dropdown-item>
 
                         <x-dropdown-item href='#' x-data="{}" @click.prevent="document.querySelector('#logout-user').submit()">Log Out</x-dropdown-item>
                         <form action="/logout" method="POST" class="hidden" id="logout-user">
