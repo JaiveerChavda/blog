@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -25,20 +26,28 @@ Route::get('/register', [RegisterController::class,'create'])->middleware('guest
 Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
 
 Route::post('/logout', [SessionController::class,'destroy']);
-Route::get('login', [SessionController::class,'create']);
+Route::get('login', [SessionController::class,'create'])->name('login');
 Route::post('login', [SessionController::class,'store']);
 
 Route::middleware('can:admin')->prefix('admin')->name('admin.')->group( function () {
     Route::resource('posts',AdminPostController::class)->except('show');
 });
 
-Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
-Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
+Route::group(['middleware' => 'auth'],function () {
 
-Route::get('followers',[UserController::class,'followers']);
-Route::get('followings',[UserController::class,'followings']);
+    Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
+    Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
 
-Route::get('remove/{follower}',[UserController::class,'remove']);
+    Route::get('followers',[UserController::class,'followers']);
+    Route::get('followings',[UserController::class,'followings']);
+
+
+    Route::resource('profile',ProfileController::class);
+
+    Route::put('password',[PasswordController::class,'update'])->name('password.update');
+
+    Route::get('remove/{follower}',[UserController::class,'remove']);
+});
 
 // In routes/web.php
 Route::feeds();
