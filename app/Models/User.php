@@ -35,6 +35,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'bookmarked_posts' => 'array',
     ];
 
     public function posts() //$user->posts

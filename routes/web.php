@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPostController;
+use App\Http\Controllers\BookmarkPostController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PostCommentController;
@@ -47,6 +48,9 @@ Route::group(['middleware' => 'auth'],function () {
     Route::put('password',[PasswordController::class,'update'])->name('password.update');
 
     Route::get('remove/{follower}',[UserController::class,'remove']);
+
+    Route::resource('bookmark',BookmarkPostController::class)->only(['store','destroy']);
+
 });
 
 // In routes/web.php

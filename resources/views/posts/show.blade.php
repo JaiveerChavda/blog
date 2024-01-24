@@ -56,6 +56,22 @@
                           {{$post->title}}
                         </h1>
 
+                        <div class="py-1 flex justify-end mr-7">
+
+                            @if($is_post_bookmarked)
+                                <form action="{{ route('bookmark.destroy',[$post]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"><i class="fa-solid fa-bookmark text-blue-500"></i></button>
+                                </form>
+                            @else
+                                <form action="{{ route('bookmark.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="postId" value={{$post->id}}>
+                                    <button type="submit"><i class="fa-regular fa-bookmark text-blue-500"></i></button>
+                                </form>
+                            @endif
+                        </div>
                         <div class="space-y-4 lg:text-lg leading-loose">
                             {!!$post->body!!}
                         </div>

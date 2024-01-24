@@ -31,10 +31,15 @@ class PostController extends Controller
 
         abort_if($post->status == 'draft',404);
 
+        $user = auth()->user();
+
+        $is_post_bookmarked = $user->bookmarked_posts ? in_array($post->id,$user->bookmarked_posts) : false;
+
         event(new PostViewed($post));
 
         return view('posts.show', [
-            'post' => $post
+            'post' => $post,
+            'is_post_bookmarked' => $is_post_bookmarked
         ]);
     }
 
