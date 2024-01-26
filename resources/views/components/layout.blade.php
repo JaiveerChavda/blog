@@ -16,6 +16,7 @@ html{
     scroll-behavior: smooth;
 }
 </style>
+@stack('css')
 
 <body style="font-family:Open Sans,sans-serif;">
     @include('feed::links')

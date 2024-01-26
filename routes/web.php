@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Models\Post;
 use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
@@ -51,6 +52,20 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::resource('bookmark',BookmarkPostController::class)->only(['store','destroy']);
 
+    Route::get('reading-list', function (Post $post) {
+
+        $post_id = request()->user()->bookmarked_posts;
+
+        if ($post_id) {
+            $posts = Post::whereIn('id',$post_id)->get();
+        }else{
+            $posts = null;
+        }
+
+        return view('user.reading-list',[
+            'posts' => $posts,
+        ]);
+    });
 });
 
 // In routes/web.php

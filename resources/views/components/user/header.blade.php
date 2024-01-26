@@ -1,4 +1,4 @@
-<div class="text-white bg-black pt-4 px-4">
+<div class="text-white bg-black pt-4 px-4 mb-8">
     <a href="/">
         <i class="fa-solid fa-arrow-left"></i>
         <span class="hover:underline">back</span>
@@ -9,6 +9,6 @@
         <x-user.navbar-items name='profile'>Profile</x-user.navbar-items>
         <x-user.navbar-items name='followers'>Followers</x-user.navbar-items>
         <x-user.navbar-items name='followings'>Followings</x-user.navbar-items>
-        <x-user.navbar-items name='myblogs'>My Blogs</x-user.navbar-items>
+        <x-user.navbar-items name='reading-list'>Reading List</x-user.navbar-items>
     </div>
 </div>

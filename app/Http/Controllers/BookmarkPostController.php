@@ -45,7 +45,7 @@ class BookmarkPostController extends Controller
 
                 $user->save();
 
-                return back()->with('success','post removed from bookmarks');
+                return back()->with('success','post removed from reading list');
             }
         } catch (\Exception $e) {
             return back()->with('error','something went wrong');

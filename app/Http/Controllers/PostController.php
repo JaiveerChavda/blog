@@ -33,7 +33,7 @@ class PostController extends Controller
 
         $user = auth()->user();
 
-        $is_post_bookmarked = $user->bookmarked_posts ? in_array($post->id,$user->bookmarked_posts) : false;
+        $is_post_bookmarked = $user?->bookmarked_posts ? in_array($post->id,$user->bookmarked_posts) : false;
 
         event(new PostViewed($post));
 
