@@ -1,5 +1,5 @@
 <x-layout>
-    <section class="py-8">
+    <section class="">
 
         {{--user dashboard header --}}
         <x-user.header/>

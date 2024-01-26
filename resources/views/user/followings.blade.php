@@ -1,11 +1,11 @@
 <x-layout>
-    <section class="py-8">
+    <section class="">
 
         {{--user dashboard header --}}
         <x-user.header/>
 
         {{-- user body content  --}}
-        <div class="mt-16 m-auto max-w-5xl">
+        <div class="m-auto max-w-7xl">
             <h1 class="font-semibold text-2xl mb-4">Discover new writers to follow:</h1>
 
             <div class="max-w-lg">
