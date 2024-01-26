@@ -5,44 +5,23 @@
         <x-user.header/>
 
         {{-- user body content  --}}
-        <div class="mt-16 m-auto max-w-md">
-            <h1 class="text-2xl mb-4 font-semibold">Your Profile</h1>
-            <x-panel>
-                <form action="{{route('profile.update',[$user->id])}}" method="post">
-                    @method('PUT')
-                    @csrf
-                    <x-forms.input name='name' :value="$user->name"/>
+        <div class="m-auto max-w-7xl ">
+            <a href="{{ route('profile.index') }}" class="hover:underline"><i class="fa-solid fa-arrow-left"></i> back</a>
 
-                    <x-forms.input name='username' :value="$user->username"/>
+            <div class="max-w-md my-4">
 
-                    <x-forms.input name='email' readonly :value="$user->email"/>
+                <h1 class="text-2xl mb-4 font-semibold">Your Profile</h1>
 
-                    <x-forms.field>
-                        <x-forms.button >Save</x-forms.button>
-                    </x-forms.field>
-                </form>
-            </x-panel>
+                <x-panel>
+                    @include('user.profile.update-personal-information')
+                </x-panel>
 
-            <h1 class="text-xl my-4 font-semibold">Update Password</h1>
-            <x-panel>
-                <form action="{{route('password.update')}}" method="post">
-                    @method('PUT')
-                    @csrf
-                    <x-forms.input name='current_password' type='password'/>
-                    <p class="text-red-500 text-xs mt-2"> {{$errors->updatePassword->first('current_password') }}</p>
+                <h1 class="text-xl my-4 font-semibold">Update Password</h1>
+                <x-panel>
+                    @include('user.profile.update-current-password')
+                </x-panel>
+            </div>
 
-                    <x-forms.input name='password' type='password'/>
-                    <p class="text-red-500 text-xs mt-2"> {{$errors->updatePassword->first('password') }}</p>
-
-
-                    <x-forms.input name='password_confirmation' type='password'/>
-                    <p class="text-red-500 text-xs mt-2"> {{$errors->updatePassword->first('password_confirmation') }}</p>
-
-                    <x-forms.field>
-                        <x-forms.button >Save</x-forms.button>
-                    </x-forms.field>
-                </form>
-            </x-panel>
         </div>
     </section>
 </x-layout>

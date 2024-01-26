@@ -25,6 +25,6 @@ done - Update the "Edit Post" page in the admin section to allow for changing th
 done - Add an RSS feed that lists all posts in chronological order.
 
 done - Record/Track and display the "views_count" for each post.
-Allow registered users to "follow" certain authors. When they publish a new post, an email should be delivered to all followers.
-Allow registered users to "bookmark" certain posts that they enjoyed. Then display their bookmarks in a corresponding settings page.
+done - Allow registered users to "follow" certain authors. When they publish a new post, an email should be delivered to all followers.
+done - Allow registered users to "bookmark" certain posts that they enjoyed. Then display their bookmarks in a corresponding settings page.
 Add an account page to update your username and upload an avatar for your profile.
