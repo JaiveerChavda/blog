@@ -23,7 +23,7 @@
 
             <div class="saved-articles w-8/12">
 
-                @if ($posts->count())
+                @if ($posts?->count())
                     <div class="saved-articles_lists">
                         <h1 class="text-2xl font-semibold mb-2">Saved Articles</h1>
 
