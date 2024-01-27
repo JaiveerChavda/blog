@@ -56,21 +56,26 @@
                           {{$post->title}}
                         </h1>
 
-                        <div class="py-1 flex justify-end mr-7">
+                        <div class="py-1 flex pb-4 mb-4 border-b-2">
+                            <div class="post-view mr-8" title="views">
+                                <span><i class="fa-solid fa-eye mr-2"></i>{{$post->view_count}}</span>
+                            </div>
 
-                            @if($is_post_bookmarked)
-                                <form action="{{ route('bookmark.destroy',[$post]) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"><i class="fa-solid fa-bookmark text-blue-500"></i></button>
-                                </form>
-                            @else
-                                <form action="{{ route('bookmark.store') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="postId" value={{$post->id}}>
-                                    <button type="submit"><i class="fa-regular fa-bookmark text-blue-500"></i></button>
-                                </form>
-                            @endif
+                            <div class="post-bookmark" title="bookmark">
+                                @if($is_post_bookmarked)
+                                    <form action="{{ route('bookmark.destroy',[$post]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"><i class="fa-solid fa-bookmark text-blue-500"></i></button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('bookmark.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="postId" value={{$post->id}}>
+                                        <button type="submit"><i class="fa-regular fa-bookmark text-blue-500"></i></button>
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                         <div class="space-y-4 lg:text-lg leading-loose">
                             {!!$post->body!!}
