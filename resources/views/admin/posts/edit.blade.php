@@ -9,11 +9,10 @@
 
                 <div class="flex mt-6">
                     <div class="flex-1">
-                        <x-forms.input name="thumbnail" type="file" :value="old('thumbnail', $post->thumbnail)" />
+                        <x-forms.input name="thumbnail" type="file"/>
                     </div>
-                        <img src="{{$post->thumbnail}}" alt="" class="rounded-xl ml-6" width="100">
+                        <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="" class="rounded-xl ml-6" width="100">
                 </div>
-
 
             <x-forms.textarea name='excerpt'>{{old('excerpt',$post->excerpt)}}</x-forms.textarea>
 
