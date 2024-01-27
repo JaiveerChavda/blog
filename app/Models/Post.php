@@ -47,7 +47,7 @@ class Post extends Model implements Feedable
 
     public function scopePublished($query)
     {
-        $query->where('status',PostStatus::PUBLISHED);
+        $query->where('status',PostStatus::PUBLISHED)->latest('published_at');
     }
 
 

@@ -52,20 +52,7 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::resource('bookmark',BookmarkPostController::class)->only(['store','destroy']);
 
-    Route::get('reading-list', function (Post $post) {
-
-        $post_id = request()->user()->bookmarked_posts;
-
-        if ($post_id) {
-            $posts = Post::whereIn('id',$post_id)->get();
-        }else{
-            $posts = null;
-        }
-
-        return view('user.reading-list',[
-            'posts' => $posts,
-        ]);
-    });
+    Route::get('reading-list',[BookmarkPostController::class,'index']);
 });
 
 // In routes/web.php

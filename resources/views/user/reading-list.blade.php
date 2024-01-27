@@ -23,11 +23,11 @@
 
             <div class="saved-articles w-8/12">
 
-                @if ($posts?->count())
+                @if ($saved_posts?->count())
                     <div class="saved-articles_lists">
                         <h1 class="text-2xl font-semibold mb-2">Saved Articles</h1>
 
-                        @foreach ($posts as $post)
+                        @foreach ($saved_posts as $post)
                             <div class="saved-article flex flex-row gap-9 justify-between py-4 border-b-2">
 
                                 <div class="saved-article_text text-xs">
@@ -67,6 +67,31 @@
 
             <div class="border-l-2 border-solid pl-8 recommended-articles w-96">
                 <h1 class="text-2xl font-semibold">You May Also Like</h1>
+                @foreach ($recommended_posts as $post)
+                <div class="recommended-article recommended-article py-4 items-center border-b-2 flex flex-row gap-4 justify-between">
+                    <div class="recommended-article_container recommended-article_container flex items-center flex-row flex-grow gap-4 justify-between w-100">
+                        <div class="recommended-article_container_text">
+                            <a href="{{ route('post.show',[$post->slug]) }}">{{$post->title}}</a>
+                        </div>
+
+                        <div>
+                        @if( auth()->user()->bookmarked_posts ? in_array($post->id,auth()->user()->bookmarked_posts) : false )
+                            <form action="{{ route('bookmark.destroy',[$post]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"><i class="fa-solid fa-bookmark text-blue-500"></i></button>
+                            </form>
+                        @else
+                            <form action="{{ route('bookmark.store') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="postId" value={{$post->id}}>
+                                <button type="submit"><i class="fa-regular fa-bookmark text-blue-500"></i></button>
+                            </form>
+                        @endif
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>
