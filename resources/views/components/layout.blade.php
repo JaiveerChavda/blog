@@ -27,7 +27,7 @@ html{
                     <img src="/images/logo.svg" alt="laracasts logo" width="165" height="16">
                 </a>
             </div>
-            <div class="mt-8 md:mt-0 flex items-center">
+            <div class="mt-8 md:mt-0 flex items-center justify-between">
                 @auth
                     <x-dropdown>
                         <x-slot name='trigger'>
