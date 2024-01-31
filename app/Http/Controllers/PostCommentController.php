@@ -20,7 +20,7 @@ class PostCommentController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return back();
+        return back()->with('success','comment published');
 
     }
 }
