@@ -14,7 +14,6 @@
     </x-slot>
 
     {{-- drop down content(links) by default it will go into slot --}}
-
     <x-dropdown-item href="/?{{http_build_query(request()->except('category' , 'page'))}}"
                     :active="request()->routeIs('home')"> All
     </x-dropdown-item>
@@ -22,7 +21,7 @@
     @foreach ($categories as $category)
     <x-dropdown-item
         href="/?category={{$category->slug}}&{{http_build_query(request()->except('category' , 'page'))}}"
-        :active="request()->is('/?category='.$category->slug)"
+        :active="request('category')  == $category->slug ? true : false"
     >{{ ucwords($category->name) }}</x-dropdown-item>
     @endforeach
 </x-dropdown>
