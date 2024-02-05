@@ -10,14 +10,18 @@
 
             <div class="max-w-lg">
                 <p class="uppercase text-xs font-semibold mb-4">writers you follow</p>
-
-                @foreach ($followings as $following)
-                    <p class="py-1">{{$following->name}}</p>
-                    <p class="mb-2">{{$following->username}}</p>
-                    <a href="{{ route('unfollow.author',[$following->username])}}"
+                @if ($followings->count()  > 0)
+                    @foreach ($followings as $following)
+                        <p class="py-1">{{$following->name}}</p>
+                        <p class="mb-2">{{$following->username}}</p>
+                        <a href="{{ route('unfollow.author',[$following->username])}}"
                         class="bg-red-500 py-1 rounded-2xl text-white ml-auto px-5 text-sm font-bold">UnFollow</a>
-                    <hr class="mt-4">
-                @endforeach
+                        <hr class="mt-4">
+                    @endforeach
+                @else
+                    <p class="text-center text-gray-500 py-8">You are not following any authors yet.</p>
+                @endif
+
             </div>
 
         </div>
