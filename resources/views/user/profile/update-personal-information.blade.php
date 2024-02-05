@@ -9,8 +9,6 @@
 
     <x-forms.input name='avatar' type='file'/>
 
-    <p><label for="image" class="text-gray-400">filename :</label> {{ $user->avatar }}</p>
-
     <img src="{{asset('storage/'.$user->avatar)}}" alt="profile-photo" class="h-24 rounded-2xl mt-4">
 
     <x-forms.field>

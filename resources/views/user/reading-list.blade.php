@@ -19,9 +19,9 @@
         {{--user dashboard header --}}
         <x-user.header/>
 
-        <div class="flex justify-center max-w-7xl mx-auto my-6 px-22 gap-8">
+        <div class="flex justify-center max-w-7xl mx-auto my-6 px-22 gap-8 flex-col sm:flex-row">
 
-            <div class="saved-articles w-8/12">
+            <div class="saved-articles sm:w-8/12 w-full">
 
                 @if ($saved_posts?->count())
                     <div class="saved-articles_lists">
@@ -65,7 +65,7 @@
                 @endif
             </div>
 
-            <div class="border-l-2 border-solid pl-8 recommended-articles w-96">
+            <div class="border-solid recommended-articles w-auto sm:w-96 sm:border-l-2 sm:pl-8">
                 <h1 class="text-2xl font-semibold">You May Also Like</h1>
                 @foreach ($recommended_posts as $post)
                 <div class="recommended-article recommended-article py-4 items-center border-b-2 flex flex-row gap-4 justify-between">

@@ -55,6 +55,18 @@ class BookmarkPostController extends Controller
 
             $bookmarks = $user->bookmarked_posts;
 
+            if(collect($bookmarks)->count() == 1){
+                $key = array_search($bookmark->id, $bookmarks);
+
+                unset($bookmarks[$key]);
+
+                $user->bookmarked_posts = $bookmarks;
+
+                $user->save();
+
+                return back()->with('success','post removed from reading list');
+            }
+
             if($key = array_search($bookmark->id, $bookmarks)) {
                 unset($bookmarks[$key]);
 
