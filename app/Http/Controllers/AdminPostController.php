@@ -6,20 +6,24 @@ use App\Enums\PostStatus;
 use App\Events\PostPublished as EventsPostPublished;
 use App\Models\Post;
 use App\Models\User;
-use App\Notifications\PostPublished;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
-    //
+
     public function index()
     {
+
+        $user = request()->user();
+
+        $is_admin = request()->user()?->can('admin');
+
+        $posts = $is_admin ? Post::latest()->paginate(50) : $user->posts ;
+
         return view('admin.posts.index',[
-            'posts' => Post::latest()->paginate(50)
+            'posts' => $posts,
         ]);
     }
 
@@ -60,6 +64,11 @@ class AdminPostController extends Controller
 
     public function edit(Post $post)
     {
+        //authorise that current user owns this post and is able to edit this post .
+
+        abort_if(auth()->id() != $post->author->id, 403);
+
+
         return view('admin.posts.edit',[
             'authors' => User::all(['id','name']),
             'post' => $post,
@@ -88,6 +97,10 @@ class AdminPostController extends Controller
 
     public function destroy(Post $post)
     {
+        //authorise that current user owns this post and is able to delete this post
+
+        abort_if(auth()->id() != $post->author->id, 403);
+
         $post->delete();
 
         return back()->with('success','post deleted!');
@@ -105,7 +118,6 @@ class AdminPostController extends Controller
             'body' => ['required'],
             'category_id' => ['required',Rule::exists('categories','id')],
             'status' => $post->exists ? ['required'] : ['nullable'],
-            'user_id' => $post->exists ? ['required',Rule::exists('users','id')] : ['nullable'],
         ]);
     }
 }

@@ -31,7 +31,7 @@ Route::post('/logout', [SessionController::class,'destroy']);
 Route::get('login', [SessionController::class,'create'])->name('login');
 Route::post('login', [SessionController::class,'store']);
 
-Route::middleware('can:admin')->prefix('admin')->name('admin.')->group( function () {
+Route::prefix('admin')->name('admin.')->group( function () {
     Route::resource('posts',AdminPostController::class)->except('show');
 });
 

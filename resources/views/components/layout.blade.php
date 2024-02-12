@@ -37,11 +37,11 @@ html{
                             <button class="text-xs text-black font-bold uppercase"> Hello, {{ auth()->user()->name}}!</button>
                         </x-slot>
 
-                        @admin('admin')
+
                         <x-dropdown-item href='/admin/posts' :active="request()->is('/admin/posts')"> Dashboard </x-dropdown-item>
                         <x-dropdown-item href='/admin/posts/create' :active="request()->is('admin/posts/create')"
                             > New Post </x-dropdown-item>
-                        @endadmin
+
 
                     <x-dropdown-item href='/profile'>Profile</x-dropdown-item>
                     <x-dropdown-item href='/followers'>Followers</x-dropdown-item>
