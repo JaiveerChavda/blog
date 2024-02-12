@@ -14,9 +14,9 @@
                         <img src="{{ asset('storage/'.$post->thumbnail) }}" alt="" class="rounded-xl ml-6" width="100">
                 </div>
 
-            <x-forms.textarea name='excerpt'>{{old('excerpt',$post->excerpt)}}</x-forms.textarea>
+            <x-forms.textarea name='excerpt' :isTextEditor="true">{{old('excerpt',$post->excerpt)}}</x-forms.textarea>
 
-            <x-forms.textarea name='body'>{{old('body',$post->body)}}</x-forms.textarea>
+            <x-forms.textarea name='body'  :isTextEditor="true">{{old('body',$post->body)}}</x-forms.textarea>
 
             <x-forms.field>
 

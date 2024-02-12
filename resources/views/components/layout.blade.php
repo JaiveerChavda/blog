@@ -16,6 +16,9 @@ html{
     scroll-behavior: smooth;
 }
 </style>
+
+<x-head.tinymce-config/>
+
 @stack('css')
 
 <body style="font-family:Open Sans,sans-serif;">

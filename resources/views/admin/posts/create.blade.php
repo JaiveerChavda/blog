@@ -10,9 +10,9 @@
 
             <x-forms.input name='thumbnail' type='file' required/>
 
-            <x-forms.textarea name='excerpt' required/>
+            <x-forms.textarea name='excerpt' :isTextEditor="true" required/>
 
-            <x-forms.textarea name='body' required/>
+            <x-forms.textarea name='body' :isTextEditor="true" required/>
 
             <x-forms.field>
 
