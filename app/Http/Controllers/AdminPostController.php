@@ -12,7 +12,6 @@ use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
-
     public function index()
     {
 
@@ -22,7 +21,7 @@ class AdminPostController extends Controller
 
         $posts = $is_admin ? Post::latest()->paginate(50) : $user->posts ;
 
-        return view('admin.posts.index',[
+        return view('admin.posts.index', [
             'posts' => $posts,
         ]);
     }
@@ -38,17 +37,21 @@ class AdminPostController extends Controller
     {
         if (request('action') == 'save_as_draft') {
 
-            $post = Post::create(array_merge($this->validatePost(), [
+            $post = Post::create(array_merge(
+                $this->validatePost(),
+                [
                 'user_id' => request()->user()->id,
                 'thumbnail' =>  request()->file('thumbnail')->store('thumbnails'),
                 'status' => PostStatus::DRAFT->value,
              ]
             ));
 
-            return Redirect::route('admin.posts.index')->with('success','post saved as draft');
+            return Redirect::route('admin.posts.index')->with('success', 'post saved as draft');
 
-        }else{
-            $post = Post::create(array_merge($this->validatePost(), [
+        } else {
+            $post = Post::create(array_merge(
+                $this->validatePost(),
+                [
                 'user_id' => request()->user()->id,
                 'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
                 'status' => PostStatus::PUBLISHED->value,
@@ -58,65 +61,73 @@ class AdminPostController extends Controller
 
             event(new EventsPostPublished($post));
 
-            return redirect('/')->with('success','post published successfuly');
+            return redirect('/')->with('success', 'post published successfuly');
         }
     }
 
     public function edit(Post $post)
     {
         //authorise that current user owns this post and is able to edit this post .
+        //only admin and the author of the post can edit the post
+        if(request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
+            return view('admin.posts.edit', [
+                'authors' => User::all(['id','name']),
+                'post' => $post,
+            ]);
 
-        abort_if(auth()->id() != $post->author->id, 403);
+        }
 
+        abort(403, 'Your are not Authorized to perform this action');
 
-        return view('admin.posts.edit',[
-            'authors' => User::all(['id','name']),
-            'post' => $post,
-        ]);
     }
 
     public function update(Post $post)
     {
         $attributes = $this->validatePost($post);
 
-        if($attributes['thumbnail'] ?? false){
+        if($attributes['thumbnail'] ?? false) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
         $post->update($attributes);
 
-        if($attributes['status'] == PostStatus::PUBLISHED->value && $post->published_at == null)
-        {
+        if($attributes['status'] == PostStatus::PUBLISHED->value && $post->published_at == null) {
             $post->published_at = now();
             $post->save();
             event(new EventsPostPublished($post));
         }
 
-        return back()->with('success','post updated');
+        return back()->with('success', 'post updated');
     }
 
     public function destroy(Post $post)
     {
         //authorise that current user owns this post and is able to delete this post
+        //only admin and the author of the post can delete the post
 
-        abort_if(auth()->id() != $post->author->id, 403);
+        if(request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
 
-        $post->delete();
+            $post->delete();
+            return back()->with('success', 'post deleted!');
 
-        return back()->with('success','post deleted!');
+        }
+
+        abort(403, 'Your are not Authorized to perform this action');
+
     }
 
     protected function validatePost(?Post $post = null)
     {
+        //if post not passed in argument the create new post object
         $post ??= new Post();
 
         return request()->validate([
             'title' => ['required'],
-            'slug' => ['required',Rule::unique('posts','slug')->ignore($post)],
+            'slug' => ['required',Rule::unique('posts', 'slug')->ignore($post)],
             'thumbnail' => $post->exists ? ['image'] : ['required','image'],
             'excerpt' => ['required'],
             'body' => ['required'],
-            'category_id' => ['required',Rule::exists('categories','id')],
+            'category_id' => ['required',Rule::exists('categories', 'id')],
             'status' => $post->exists ? ['required'] : ['nullable'],
         ]);
     }
