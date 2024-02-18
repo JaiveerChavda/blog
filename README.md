@@ -1,30 +1,59 @@
-laracasts the path blog project for practise using laravel version 8 
-laravel 8 from scratch.
+# Blog (using laravel 10.0 || for begineer - intermediate)
 
-https://github.com/JeffreyWay/Laravel-From-Scratch-Blog-Project
+## Overview
 
-next steps to follow:
+Blog is a fully functional blog management web app, which is built using laravel v10.0 as a backend framework, used tailwing v2.0 and alpine.js v3.0 for handling frontend stuff.
+It can manage posts, with some great functionality like WYSIWYG text editor, save as draft feature, dynamic filtering options with search and category dropdown.
 
-1-complete some lessons given by jeff. from github repo link.
-2-Queue - done
-3-Events - done
-4-Compiling assets
-5-advanced eloquent relation ships - done
-6-artisan commands
-7-Http Tests
-8-Notifications - done
-9- eloquent - API Resource.
+I built this project following [this](https://laracasts.com/series/laravel-8-from-scratch) awesome tutorial by [@jeffrey_way](https://twitter.com/jeffrey_way), by following this series you learn a lot about the basics of laravel , that you may did'nt discovered before. highly recommended for beginner of laravel.
 
-TODO:
-Of course we only had time in the Laravel From Scratch series to review the essentials of a blogging platform. You can certainly take this many steps further. Here are some quick ideas that you might play with.
+I completed this project by adding all features listed in this [readme.md](https://github.com/JeffreyWay/Laravel-From-Scratch-Blog-Project?tab=readme-ov-file#further-ideas) file.
+so after completing the series, while doing the additional features , if you find yourself stuck any where or don't have idea how to start , follow the commits provided in this repo , and you're good to go.  
 
-done - Add a status column to the posts table to allow for posts that are still in a "draft" state. Only when this status is changed to "published" should they show up in the blog feed.
+## Prerequisites
 
-done - Update the "Edit Post" page in the admin section to allow for changing the author of a post.
+You need to have installed the following software:
 
-done - Add an RSS feed that lists all posts in chronological order.
+- PHP 8.3.0
+- Composer 2.5.0
+- MySQL 8.2.0
 
-done - Record/Track and display the "views_count" for each post.
-done - Allow registered users to "follow" certain authors. When they publish a new post, an email should be delivered to all followers.
-done - Allow registered users to "bookmark" certain posts that they enjoyed. Then display their bookmarks in a corresponding settings page.
-Add an account page to update your username and upload an avatar for your profile.
+## Installation
+
+Follow these steps to set up a development environment:
+
+1. **Clone the repository**
+
+    ```bash
+    git clone https://github.com/JaiveerChavda/blog.git
+    ```
+
+2. **Install dependencies**
+
+    ```bash
+    composer install
+    ```
+
+3. **Duplicate the .env.example file and rename it to .env**
+
+    ```bash
+    cp .env.example .env
+    ```
+
+4. **Generate the application key**
+
+    ```bash
+    php artisan key:generate
+    ```
+
+5. **Run migration and seed**
+
+    ```bash
+    php artisan migrate --seed
+    ```
+
+6. **Run the application**
+
+    ```bash
+    php artisan serve
+    ```
