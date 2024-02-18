@@ -1,6 +1,6 @@
 # Blog (using laravel 10.0 || for begineer - intermediate)
 
-## Overview
+## Overview 
 
 Blog is a fully functional blog management web app, which is built using laravel v10.0 as a backend framework, used tailwing v2.0 and alpine.js v3.0 for handling frontend stuff.
 It can manage posts, with some great functionality like WYSIWYG text editor, save as draft feature, dynamic filtering options with search and category dropdown.
@@ -18,7 +18,16 @@ You need to have installed the following software:
 - Composer 2.5.0
 - MySQL 8.2.0
 
-## Installation
+## Features
+
+- Manage Blogs
+- Save as draft (to publish it later)
+- Follow/Unfollow Authors ( follow any author to receive email notifications when they publish new blog.) 
+- Post Publish Notification
+- Bookmark posts ( if you enjoy reading any post then bookmark it to read it later. )
+- RSS feed reader
+
+## Installation 
 
 Follow these steps to set up a development environment:
 
@@ -57,3 +66,31 @@ Follow these steps to set up a development environment:
     ```bash
     php artisan serve
     ```
+## Before Starting
+
+### Authentication Details
+
+Register yourself and you will get able to access dashboard.  
+
+click on you name in the upper right corner and you will able to see link to dashboard page  
+
+Use username:admin  and email as admin@example.org while registration, to get admin privileges.
+![image](https://github.com/JaiveerChavda/blog/assets/108678186/db5dd5e6-9dd0-46f4-aeb8-ae607f6c5fe7)
+
+### Configure Mail Driver
+
+configure your mail mailer and host in .env file.
+
+### Publish Post
+
+before you publish post(create) please start queue:work  
+
+
+```bash
+php artisan queue:work
+```
+
+
+
+
+ 
