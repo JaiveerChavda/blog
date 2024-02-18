@@ -74,7 +74,8 @@ Register yourself and you will get able to access dashboard.
 
 click on you name in the upper right corner and you will able to see link to dashboard page  
 
-Use username:admin  and email as admin@example.org while registration, to get admin privileges.
+Use username:admin  and email as admin@example.org while registration, to get admin privileges.  
+
 ![image](https://github.com/JaiveerChavda/blog/assets/108678186/db5dd5e6-9dd0-46f4-aeb8-ae607f6c5fe7)
 
 ### Configure Mail Driver
@@ -90,6 +91,9 @@ before you publish post(create) please start queue:work
 php artisan queue:work
 ```
 
+## Give Feedback 💬
+
+Give your feedback on [@JaiveerChavda](https://x.com/JaiveerChavda)
 
 
 
