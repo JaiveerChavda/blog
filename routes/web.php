@@ -40,8 +40,8 @@ Route::group(['middleware' => 'auth'],function () {
     Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
     Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
 
-    Route::get('followers',[UserController::class,'followers']);
-    Route::get('followings',[UserController::class,'followings']);
+    Route::get('followers',[UserController::class,'followers'])->name('followers');
+    Route::get('followings',[UserController::class,'followings'])->name('followings');
 
 
     Route::resource('profile',ProfileController::class);
@@ -50,9 +50,8 @@ Route::group(['middleware' => 'auth'],function () {
 
     Route::get('remove/{follower}',[UserController::class,'remove']);
 
-    Route::resource('bookmark',BookmarkPostController::class)->only(['store','destroy']);
+    Route::resource('bookmark',BookmarkPostController::class)->only(['index','store','destroy']);
 
-    Route::get('reading-list',[BookmarkPostController::class,'index']);
 });
 
 // In routes/web.php
