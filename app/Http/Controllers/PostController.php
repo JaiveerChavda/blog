@@ -19,7 +19,7 @@ class PostController extends Controller
                 ->latest()
                 ->published()
                 ->filter(
-                request(['search','category','author'])
+                    request(['search','category','author'])
                 )->paginate(6)
                 ->withQueryString(),
         ]);
@@ -29,11 +29,11 @@ class PostController extends Controller
     {
         //show 404 response if post is in draft mode
 
-        abort_if($post->status == 'draft',404);
+        abort_if($post->status == 'draft', 404);
 
         $user = auth()->user();
 
-        $is_post_bookmarked = $user?->bookmarked_posts ? in_array($post->id,$user->bookmarked_posts) : false;
+        $is_post_bookmarked = $user?->bookmarked_posts ? in_array($post->id, $user->bookmarked_posts) : false;
 
         event(new PostViewed($post));
 

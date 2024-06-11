@@ -18,11 +18,11 @@ use Illuminate\Validation\ValidationException;
 Route::get('/', [PostController::class,'index'])->name('home');
 
 Route::get('/posts/{post}', [PostController::class,'show'])->name('post.show');
-Route::get('post-feed/{post}',[PostController::class,'showPostsFeed'])->name('post.show-feed');
+Route::get('post-feed/{post}', [PostController::class,'showPostsFeed'])->name('post.show-feed');
 
 Route::post('/posts/{post:slug}/comments', [PostCommentController::class,'store']); //store post comment's
 
-Route::post('newsletter',NewsletterController::class);
+Route::post('newsletter', NewsletterController::class);
 
 Route::get('/register', [RegisterController::class,'create'])->middleware('guest');
 Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
@@ -31,26 +31,26 @@ Route::post('/logout', [SessionController::class,'destroy']);
 Route::get('login', [SessionController::class,'create'])->name('login');
 Route::post('login', [SessionController::class,'store']);
 
-Route::prefix('admin')->name('admin.')->group( function () {
-    Route::resource('posts',AdminPostController::class)->except('show');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('posts', AdminPostController::class)->except('show');
 });
 
-Route::group(['middleware' => 'auth'],function () {
+Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/follow/{author:username}',[UserController::class,'follow'])->name('follow.author');
-    Route::get('/unfollow/{author:username}',[UserController::class,'unFollow'])->name('unfollow.author');
+    Route::get('/follow/{author:username}', [UserController::class,'follow'])->name('follow.author');
+    Route::get('/unfollow/{author:username}', [UserController::class,'unFollow'])->name('unfollow.author');
 
-    Route::get('followers',[UserController::class,'followers'])->name('followers');
-    Route::get('followings',[UserController::class,'followings'])->name('followings');
+    Route::get('followers', [UserController::class,'followers'])->name('followers');
+    Route::get('followings', [UserController::class,'followings'])->name('followings');
 
 
-    Route::resource('profile',ProfileController::class);
+    Route::resource('profile', ProfileController::class);
 
-    Route::put('password',[PasswordController::class,'update'])->name('password.update');
+    Route::put('password', [PasswordController::class,'update'])->name('password.update');
 
-    Route::get('remove/{follower}',[UserController::class,'remove']);
+    Route::get('remove/{follower}', [UserController::class,'remove']);
 
-    Route::resource('bookmark',BookmarkPostController::class)->only(['index','store','destroy']);
+    Route::resource('bookmark', BookmarkPostController::class)->only(['index','store','destroy']);
 
 });
 
