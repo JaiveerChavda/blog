@@ -19,35 +19,46 @@ class Post extends Model implements Feedable
         'published_at' => 'datetime',
     ];
 
-    public function scopeFilter($query,array $filters)
+    public function scopeFilter($query, array $filters)
     {
-        $query->when($filters['search'] ?? false, fn ($query,$search) =>
-            $query->where(fn($query) =>
+        $query->when(
+            $filters['search'] ?? false,
+            fn ($query, $search) =>
+            $query->where(
+                fn ($query) =>
                     $query->where('title', 'like', '%' . $search . '%')
                     ->Orwhere('body', 'like', '%' . $search . '%')
-                )
-            );
-
-        $query->when($filters['category'] ?? false,fn ($query,$category) =>
-            $query->whereHas('category',fn ($query) =>
-                $query->where('slug',$category)
-                )
+            )
         );
 
-        $query->when($filters['author'] ?? false,fn ($query,$author) =>
-            $query->whereHas('author',fn ($query) =>
-                $query->where('username',$author)
-                )
+        $query->when(
+            $filters['category'] ?? false,
+            fn ($query, $category) =>
+            $query->whereHas(
+                'category',
+                fn ($query) =>
+                $query->where('slug', $category)
+            )
+        );
+
+        $query->when(
+            $filters['author'] ?? false,
+            fn ($query, $author) =>
+            $query->whereHas(
+                'author',
+                fn ($query) =>
+                $query->where('username', $author)
+            )
         );
     }
 
-     /**
-     * Filter posts by published status
+    /**
+    * Filter posts by published status
     */
 
     public function scopePublished($query)
     {
-        $query->where('status',PostStatus::PUBLISHED)->latest('published_at');
+        $query->where('status', PostStatus::PUBLISHED)->latest('published_at');
     }
 
 
@@ -71,7 +82,7 @@ class Post extends Model implements Feedable
 
     public function author()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function toFeedItem(): FeedItem
@@ -94,6 +105,6 @@ class Post extends Model implements Feedable
     //get the link to show in rss feed
     public function getLink()
     {
-        return route('post.show',$this);
+        return route('post.show', $this);
     }
 }
