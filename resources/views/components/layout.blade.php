@@ -23,48 +23,19 @@
 <body style="font-family:Open Sans,sans-serif;">
     @include('feed::links')
     <section class="px-6 py-8">
-        <nav class="md:flex md:justify-between md:items-center mb-6">
-            {{-- App Logo --}}
+        <nav class="md:items-center mb-6 flex justify-between">
+
             <div>
-                <a href="/" class="uppercase tracking-widest font-semibold text-2xl flex items-center">
-                    <img src="/images/BAPU_updated.png" class="w-12" alt="Bapucodes logo">
+                <a href="/" class="text-2xl flex font-extrabold items-center">
+
 
                     Bapucodes
                 </a>
             </div>
-            <div class="mt-8 md:mt-0 flex items-center justify-between">
-                @auth
-                    <x-dropdown>
-                        <x-slot name='trigger'>
-                            <button class="text-xs text-black font-bold uppercase"> Hello,
-                                {{ auth()->user()->name }}!</button>
-                        </x-slot>
+            <div class="md:mt-0 flex items-center">
+                                    <a href="/register" class="text-sm text-black font-bold ">Register</a>
+                    <a href="/login" class="text-sm text-black font-bold ml-4">Log In</a>
 
-
-                        <x-dropdown-item href='/admin/posts' :active="request()->is('/admin/posts')"> Dashboard </x-dropdown-item>
-                        <x-dropdown-item href='/admin/posts/create' :active="request()->is('admin/posts/create')"> New Post </x-dropdown-item>
-
-
-                        <x-dropdown-item href='/profile'>Profile</x-dropdown-item>
-                        <x-dropdown-item href='/followers'>Followers</x-dropdown-item>
-                        <x-dropdown-item href='/followings'>Followings</x-dropdown-item>
-
-                        <x-dropdown-item href='#' x-data="{}"
-                            @click.prevent="document.querySelector('#logout-user').submit()">Log Out</x-dropdown-item>
-                        <form action="/logout" method="POST" class="hidden" id="logout-user">
-                            @csrf
-                        </form>
-                    </x-dropdown>
-                @else
-                    <a href="/register" class="text-xs text-black font-bold uppercase">Register</a>
-                    <a href="/login" class="ml-6 text-xs text-black font-bold uppercase">Log In</a>
-                @endauth
-                <a href="#subscribe"
-                    class="text-xs font-semibold bg-blue-500 px-6 py-3 text-white uppercase rounded-full ml-3">
-                    Subscribe
-                    for
-                    Updates
-                </a>
 
             </div>
         </nav>
