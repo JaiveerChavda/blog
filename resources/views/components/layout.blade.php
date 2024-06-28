@@ -27,8 +27,6 @@
 
             <div>
                 <a href="/" class="text-2xl flex font-extrabold items-center">
-
-
                     Bapucodes
                 </a>
             </div>
