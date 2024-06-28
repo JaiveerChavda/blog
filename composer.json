@@ -12,6 +12,7 @@
         "laravel/framework": "^11.10",
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.15",
         "laravel/tinker": "^2.8",
         "mailchimp/marketing": "^3.0",
         "spatie/laravel-feed": "^4.3",
