@@ -15,10 +15,17 @@
                         </x-forms.field>
 
                         {{-- submit form --}}
-                        <x-forms.field>
-                            <x-forms.button>Submit</x-forms.button>
+                        <x-forms.field class="text-center">
+                            <x-forms.button>Login</x-forms.button>
                         </x-forms.field>
                     </form>
+
+                    <div class="flex justify-center my-4">
+                        <form action="{{ url('auth/redirect?type=google')  }}"  method="POST">
+                            @csrf
+                            <x-forms.button>login with google</x-forms.button>
+                        </form>
+                    </div>
                 </x-panel>
             </main>
     </section>

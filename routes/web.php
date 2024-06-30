@@ -11,9 +11,12 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
 use App\Models\Post;
+use App\Models\User;
 use App\Services\Newsletter;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [PostController::class,'index'])->name('home');
 
@@ -30,6 +33,42 @@ Route::post('/register', [RegisterController::class,'store'])->middleware('guest
 Route::post('/logout', [SessionController::class,'destroy']);
 Route::get('login', [SessionController::class,'create'])->name('login');
 Route::post('login', [SessionController::class,'store']);
+
+
+// social login routes
+Route::post('/auth/redirect', function () {
+    $driver = request()->get('type');
+    return Socialite::driver($driver)->redirect();
+});
+
+Route::get('/auth/callback', function () {
+    $type = request()->get('type');
+
+    $socialUser = Socialite::driver($type)->user();
+
+    $type_id = $type.'_id';
+
+    $user = User::updateOrCreate([
+        'email' => $socialUser->email,
+    ], [
+        $type_id => $socialUser->id,
+        'username' => $socialUser->name,
+        'name' => $socialUser->name,
+        'email' => $socialUser->email,
+        'avatar' => $socialUser->avatar,
+        'email_verified_at' => now(),
+        'first_social_login_by' => $type,
+        'last_authenticated_at' => now(),
+        'last_authenticated_by' => $type,
+    ]);
+
+    Auth::login($user);
+
+    return redirect('/');
+});
+
+// social login routes
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', AdminPostController::class)->except('show');
