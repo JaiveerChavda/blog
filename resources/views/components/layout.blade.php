@@ -25,18 +25,45 @@
     <section class="px-6 py-8">
         <nav class="md:items-center mb-6 flex justify-between">
 
+
+            {{-- app logo --}}
             <div>
                 <a href="/" class="text-2xl flex font-extrabold items-center">
                     Bapucodes
                 </a>
             </div>
+
             <div class="md:mt-0 flex items-center">
-                                    <a href="/register" class="text-sm text-black font-bold ">Register</a>
-                    <a href="/login" class="text-sm text-black font-bold ml-4">Log In</a>
+                @auth
+                    <x-dropdown>
+                        <x-slot name='trigger'>
+                            <button class="text-sm text-black font-bold"> {{ __('welcome',['name' => auth()->user()->name ]) }}</button>
+                        </x-slot>
+
+
+                        <x-dropdown-item href='/admin/posts' :active="request()->is('/admin/posts')"> Dashboard </x-dropdown-item>
+                        <x-dropdown-item href='/admin/posts/create' :active="request()->is('admin/posts/create')"> New Post </x-dropdown-item>
+
+
+                        <x-dropdown-item href='/profile'>Profile</x-dropdown-item>
+                        <x-dropdown-item href='/followers'>Followers</x-dropdown-item>
+                        <x-dropdown-item href='/followings'>Followings</x-dropdown-item>
+
+                        <x-dropdown-item href='#' x-data="{}"
+                            @click.prevent="document.querySelector('#logout-user').submit()">Log Out</x-dropdown-item>
+                        <form action="/logout" method="POST" class="hidden" id="logout-user">
+                            @csrf
+                        </form>
+                    </x-dropdown>
+                @else
+                    <a href="/register" class="text-xs text-black font-bold uppercase">Register</a>
+                    <a href="/login" class="ml-6 text-xs text-black font-bold uppercase">Log In</a>
+                @endauth
 
 
             </div>
         </nav>
+
 
         {{ $slot }}
 
