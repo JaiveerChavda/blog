@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\SocialLoginController;
 use App\Http\Controllers\UserController;
 use App\Models\Post;
 use App\Models\User;
@@ -36,38 +37,11 @@ Route::post('login', [SessionController::class,'store']);
 
 
 // social login routes
-Route::post('/auth/redirect', function () {
-    $driver = request()->get('type');
-    return Socialite::driver($driver)->redirect();
-});
+Route::post('/auth/redirect',[SocialLoginController::class,'redirect']);
 
-Route::get('/auth/callback', function () {
-    $type = request()->get('type');
+Route::get('/auth/callback',[SocialLoginController::class,'callback']);
 
-    $socialUser = Socialite::driver($type)->user();
-
-    $type_id = $type.'_id';
-
-    $user = User::updateOrCreate([
-        'email' => $socialUser->email,
-    ], [
-        $type_id => $socialUser->id,
-        'username' => $socialUser->name,
-        'name' => $socialUser->name,
-        'email' => $socialUser->email,
-        'avatar' => $socialUser->avatar,
-        'email_verified_at' => now(),
-        'first_social_login_by' => $type,
-        'last_authenticated_at' => now(),
-        'last_authenticated_by' => $type,
-    ]);
-
-    Auth::login($user);
-
-    return redirect('/');
-});
-
-// social login routes
+// social login routes end
 
 
 Route::prefix('admin')->name('admin.')->group(function () {
