@@ -25,6 +25,12 @@ class SessionController extends Controller
         //based on the provided credentials.
         if(auth()->attempt($attributes)){
             session()->regenerate();
+            $user = auth()->user();
+
+            $user->update([
+                'last_authenticated_at' => now(),
+                'last_authenticated_by' => 'manual'
+            ]);
             return redirect('/')->with('success','Welcome Back!');
         }
 

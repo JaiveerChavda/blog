@@ -37,7 +37,7 @@
                 @auth
                     <x-dropdown>
                         <x-slot name='trigger'>
-                            <button class="text-sm text-black font-bold"> {{ __('welcome',['name' => auth()->user()->name ]) }}</button>
+                            <button class="text-sm text-black font-bold"> {{ __('welcome',['name' => auth()->user()->username ]) }}</button>
                         </x-slot>
 
 
