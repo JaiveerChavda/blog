@@ -28,26 +28,32 @@ Route::post('/posts/{post:slug}/comments', [PostCommentController::class,'store'
 
 Route::post('newsletter', NewsletterController::class);
 
-Route::get('/register', [RegisterController::class,'create'])->middleware('guest');
-Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
+//guest routes
+Route::group(['middleware' => 'guest'], function () {
+
+    Route::get('/register', [RegisterController::class,'create'])->middleware('guest');
+
+    Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
+
+    // social login routes
+    Route::post('/auth/redirect', [SocialLoginController::class,'redirect'])->middleware('guest');
+
+    Route::get('/auth/callback', [SocialLoginController::class,'callback'])->middleware('guest');
+
+    // social login routes end
+});
+
 
 Route::post('/logout', [SessionController::class,'destroy']);
 Route::get('login', [SessionController::class,'create'])->name('login');
 Route::post('login', [SessionController::class,'store']);
 
 
-// social login routes
-Route::post('/auth/redirect',[SocialLoginController::class,'redirect']);
-
-Route::get('/auth/callback',[SocialLoginController::class,'callback']);
-
-// social login routes end
-
-
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('posts', AdminPostController::class)->except('show');
 });
 
+//auth routes
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/follow/{author:username}', [UserController::class,'follow'])->name('follow.author');
