@@ -57,7 +57,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/follow/{author:username}', [UserController::class,'follow'])->name('follow.author');
-    Route::get('/unfollow/{author:username}', [UserController::class,'unFollow'])->name('unfollow.author');
+    Route::delete('/unfollow/{author:username}', [UserController::class,'unFollow'])->name('unfollow.author');
 
     Route::get('followers', [UserController::class,'followers'])->name('followers');
     Route::get('followings', [UserController::class,'followings'])->name('followings');

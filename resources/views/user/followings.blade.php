@@ -13,10 +13,17 @@
                 <div class="flex flex-col gap-3">
                     @if ($followings->count()  > 0)
                     @foreach ($followings as $following)
-                    <div class="flex gap-4 items-start justify-center border-b-2 py-2">
+                    <div class="flex gap-4 items-center justify-center border-b-2 py-2">
                         <p class="mb-2">{{$following->username}}</p>
-                        <a href="{{ route('unfollow.author',[$following->username])}}"
-                        class="bg-red-500 py-1 rounded-2xl text-white ml-auto px-5 text-sm font-bold">UnFollow</a>
+                        <div class="ml-auto">
+                            <form action="{{route('unfollow.author',[$following->username])}}" class="" method="POST">
+                                @csrf
+                                @method('delete')
+                                <x-forms.button extClass=' bg-red-500 border-solid border  hover:border-gray-300 border-gray-400'>Unfollow</x-form.button>
+                            </form>
+                        </div>
+                        {{-- <a href="{{ route('unfollow.author',[$following->username])}}"
+                        class="bg-red-500 py-1 rounded-2xl text-white ml-auto px-5 text-sm font-bold">UnFollow</a> --}}
                     </div>
                     @endforeach
                 @else
