@@ -6,9 +6,6 @@
 
 @endphp
 
-<button type="submit" class="{{$class}}"
-    {{-- class="bg-blue-500 text-white px-10 py-2 rounded-2xl text-xs font-semibold hover:bg-blue-600 " --}}
-    {{-- class="px-10 py-2 rounded-2xl text-xs font-semibold border-solid border  hover:border-gray-300 border-gray-600" --}}
-    >
+<button type="submit" class="{{$class}}">
     {{$slot}}
 </button>
