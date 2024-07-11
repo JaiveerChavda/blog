@@ -15,7 +15,7 @@
     }
 </style>
 
-@vite('./resources/js/app.js')
+@vite('resources/js/app.js')
 <x-head.tinymce-config />
 
 @stack('css')
