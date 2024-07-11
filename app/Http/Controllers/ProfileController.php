@@ -60,7 +60,7 @@ class ProfileController extends Controller
     {
         $validated = request()->validate([
             'name' => ['string','max:255'],
-            'username' => ['string','max:255'],
+            'username' => ['string','max:255','unique:users'],
             'avatar' => ['nullable','image','max:2048'],
         ]);
 
