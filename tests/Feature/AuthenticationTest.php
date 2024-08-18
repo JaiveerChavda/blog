@@ -39,11 +39,32 @@ class AuthenticationTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $this->post('/login', [
+        $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'wrong-password',
         ]);
 
+        $response->assertInvalid();
         $this->assertGuest();
+    }
+
+    public function test_guest_can_not_see_admin_dashboard()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->get('/admin/posts');
+
+        $response->assertRedirect('/login');
+    }
+
+    public function test_user_can_not_see_login_page()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $response = $this->get('/login');
+
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

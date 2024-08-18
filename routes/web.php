@@ -45,8 +45,11 @@ Route::group(['middleware' => 'guest'], function () {
 
 
 Route::post('/logout', [SessionController::class,'destroy']);
-Route::get('login', [SessionController::class,'create'])->name('login');
-Route::post('login', [SessionController::class,'store']);
+
+Route::middleware('guest')->group(function () {
+    Route::get('login', [SessionController::class,'create'])->name('login');
+    Route::post('login', [SessionController::class,'store']);
+});
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
