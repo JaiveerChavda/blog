@@ -26,10 +26,10 @@
         <nav class="md:items-center mb-6 flex justify-between">
 
 
-            {{-- app logo --}}
+            {{-- app logo or name--}}
             <div>
-                <a href="/" class="text-2xl flex font-extrabold items-center">
-                    Bapucodes
+                <a href="/" class="flex items-center font-bold text-2xl uppercase tracking-widest">
+                    {{ env('APP_NAME') }}
                 </a>
             </div>
 
