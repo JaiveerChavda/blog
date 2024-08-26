@@ -10,7 +10,11 @@
                         </p>
 
                         <div class="flex items-center lg:justify-start text-sm mt-4">
-                            <img src="/images/lary-avatar.svg" alt="Lary avatar">
+                            {{-- author avtar --}}
+                            <img class="w-12"
+                            src="https://ui-avatars.com/api/?name={{ $post->author->username }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
+                            title="{{ $post->author->username }}">
+
                             <div class="ml-3 text-left">
                                 <h5 class="font-bold">
                                     <a href="/?author={{$post->author->username}}">{{$post->author->name}}</a>
