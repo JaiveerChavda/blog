@@ -12,8 +12,8 @@
                         <div class="flex items-center lg:justify-start text-sm mt-4">
                             {{-- author avtar --}}
                             <img class="w-12"
-                            src="https://ui-avatars.com/api/?name={{ $post->author->username }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
-                            title="{{ $post->author->username }}">
+                            src="https://ui-avatars.com/api/?name={{ $post->author->name }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
+                            title="{{ $post->author->name }}">
 
                             <div class="ml-3 text-left">
                                 <h5 class="font-bold">

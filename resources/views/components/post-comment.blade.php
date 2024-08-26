@@ -4,8 +4,8 @@
         <div class="flex-shrink-0">
             {{-- author avtar --}}
             <img class="w-12"
-            src="https://ui-avatars.com/api/?name={{ $comment->author->username }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
-            title="{{ $comment->author->username }}">
+            src="https://ui-avatars.com/api/?name={{ $comment->author->name }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
+            title="{{ $comment->author->name }}">
         </div>
 
         <div>
