@@ -31,7 +31,12 @@
 
             <footer class="flex justify-between items-center mt-8">
                 <div class="flex items-center">
-                    <img src="/images/lary-avatar.svg" alt="Lary avtar">
+
+                    {{-- author avtar --}}
+                    <img class="w-12"
+                    src="https://ui-avatars.com/api/?name={{ $post->author->username }}&amp;size=64&amp;rounded=true&amp;color=fff&amp;background=fc6369"
+                    title="{{ $post->author->username }}">
+
                     <div class="ml-3">
                         <h5 class="font-bold">
                             <a href="/?author={{$post->author->username}}">{{$post->author->name}}</a>
