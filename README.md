@@ -1,4 +1,4 @@
-# Blog (using laravel 10.0 || for begineer - intermediate)
+# Blog (using laravel 10.0 || for begineer - intermediate) [Live](http://blog.gocoding.in)
 
 ## Overview 
 
