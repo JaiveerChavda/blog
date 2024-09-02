@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        //     
         app()->bind(Newsletter::class, function (){
 
             $client = (new ApiClient)->setConfig([
@@ -39,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('admin', function (User $user) {
             return $user->username == 'admin';
+        });
+
+        Gate::define('viewPulse',function (User $user) {
+            return $user->username == 'jchavda' || $user->username == 'Jayveersinh';
         });
 
         Blade::if('admin', function () {
