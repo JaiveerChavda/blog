@@ -68,7 +68,7 @@
         {{ $slot }}
 
         <footer class="bg-gray-100 border border-black border-opacity-5 text-center rounded-xl py-16 px-10 mt-16">
-            <img src="/images/lary-newsletter-icon.png" alt="lary newsletter" class="mx-auto" style="width: 145px;">
+            <i class="fa-regular fa-envelope text-3xl mb-2"></i>
             <h5 class="text-3xl">Stay in touch with the latest posts</h5>
             <p>Promise to keep the inbox clean. No bugs.</p>
 
