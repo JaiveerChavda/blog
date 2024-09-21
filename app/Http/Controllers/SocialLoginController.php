@@ -39,6 +39,6 @@ class SocialLoginController extends Controller
 
         Auth::login($user);
 
-        return redirect('/');
+        return redirect('/')->with('success',"$type login successfull");
     }
 }
