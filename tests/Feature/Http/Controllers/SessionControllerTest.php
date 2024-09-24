@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Exceptions;
 use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
-class AuthenticationTest extends TestCase
+class SessionControllerTest extends TestCase
 {
     /**
      * A basic feature test example.
