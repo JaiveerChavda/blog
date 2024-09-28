@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -60,7 +61,7 @@ class ProfileController extends Controller
     {
         $validated = request()->validate([
             'name' => ['string','max:255'],
-            'username' => ['string','max:255','unique:users'],
+            'username' => ['string','max:255',Rule::unique('users')->ignore($profile->id)],
             'avatar' => ['nullable','image','max:2048'],
         ]);
 
