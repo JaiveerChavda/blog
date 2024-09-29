@@ -40,15 +40,15 @@ test('user can update profile', function () {
                 'name' => 'jaiveer',
                 'username' => 'JaiveerChavda',
                 'avatar' => UploadedFile::fake()->image('user-avtar.png'),
-            ]);
-
-    $user->refresh();
-
-    expect($user->name)->not->tobe('jaiveer1');       
+            ]);      
 
     $response->assertValid()
             ->assertRedirect(route('profile.index'))
             ->assertSessionHas('success','profile updated successfully');
+    
+    $user->refresh();
+
+    expect($user->name)->not->tobe('jaiveer1');     
 });
 
 test('user cannot update profile with already exists username', function () {
@@ -67,12 +67,12 @@ test('user cannot update profile with already exists username', function () {
                 'avatar' => UploadedFile::fake()->image('user-avtar.png'),
             ]);
 
-    $user->refresh();
-
-    expect($user->name)->tobe('john');
-
     $response->assertInValid()
     ->assertSessionHasErrors([
         'username' => 'The username has already been taken.',
     ]);
+
+    $user->refresh();
+
+    expect($user->name)->tobe('john');
 });
