@@ -25,3 +25,17 @@ test('return validation error of password confirmation',function (){
             'password' => 'The password field confirmation does not match.'
         ]);
 });
+
+test('user cannot update password with invalid current password',function () {
+    $response = login()
+                    ->put(route('password.update'),[
+                        'current_password' => 'passwordd', //wrong password
+                        'password' => 'passwords',
+                        'password_confirmation' => 'passwords'
+                    ]);
+                    
+    $response->assertInValid()
+        ->assertSessionHasErrorsIn('updatePassword',[
+            'current_password' => 'The password is incorrect.'
+        ]);
+});
