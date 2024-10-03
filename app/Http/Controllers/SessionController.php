@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -13,32 +15,15 @@ class SessionController extends Controller
         return view('session.create');
     }
 
-    public function store()
+    public function store(LoginRequest $request)
     {
-        //validate the  request
-        $attributes = request()->validate([
-            'email' => ['required','exists:users,email'],
-            'password' => ['required']
-        ]);
+        $request->authenticate();
 
-        //attempt to authenticate and log in the user
-        //based on the provided credentials.
-        if(auth()->attempt($attributes)){
-            session()->regenerate();
-            $user = auth()->user();
+        $request->session()->regenerate();
 
-            $user->update([
-                'last_authenticated_at' => now(),
-                'last_authenticated_by' => 'manual'
-            ]);
-            return redirect('/')->with('success','Welcome Back!');
-        }
-
-        //newer and advance way to flash validation error
-        throw ValidationException::withMessages([
-            'email'=>'your provided credentials could not be verified.'
-        ]);
-
+        return redirect()
+            ->intended(RouteServiceProvider::HOME)
+            ->with('success','welcome back!');
     }
 
     public function destroy()
