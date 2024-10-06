@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\PostStatus;
 use App\Events\PostPublished as EventsPostPublished;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -28,7 +29,9 @@ class AdminPostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        return view('admin.posts.create',[
+            'categories' => Category::all(['id','name']),
+        ]);
     }
 
     //publish the given post
@@ -97,7 +100,9 @@ class AdminPostController extends Controller
             event(new EventsPostPublished($post));
         }
 
-        return back()->with('success', 'post updated');
+        return redirect()
+                ->route('admin.posts.edit',['post' => $post->slug])
+                ->with('success', 'post updated');
     }
 
     public function destroy(Post $post)
