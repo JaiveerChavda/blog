@@ -1,5 +1,7 @@
 <?php
 
+pest()->group('password');
+
 test('user can update password from profile screen',function (){
     $response = login()
                 ->put(route('password.update'),[

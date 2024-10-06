@@ -5,8 +5,7 @@ namespace Tests\Feature\Http\Controllers;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
+pest()->group('register');
 
 test('registration screen can be rendered', function () {
     $response = $this->get('/register');

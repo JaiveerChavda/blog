@@ -1,5 +1,7 @@
 <?php
 
+pest()->group('profile');
+
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
