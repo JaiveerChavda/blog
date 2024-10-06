@@ -185,4 +185,18 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    /*
+    |--------------------------------------------------------------------------
+    | App Admin Username
+    |--------------------------------------------------------------------------
+    |
+    | This value is used in Gate, for authorization of admin user
+    | so they can manage posts. 
+    |
+    */
+
+    'app_admin_username' => env('APP_ADMIN_USERNAME'),
+
+    'pulse_admin_username' => env('PULSE_ADMIN_USERNAME')
+
 ];

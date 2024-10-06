@@ -38,11 +38,11 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
         Gate::define('admin', function (User $user) {
-            return $user->username == 'admin';
+            return $user->username == config('app.app_admin_username');
         });
 
         Gate::define('viewPulse',function (User $user) {
-            return $user->username == 'jchavda' || $user->username == 'Jayveersinh';
+            return $user->username == config('app.pulse_admin_username');
         });
 
         Blade::if('admin', function () {
