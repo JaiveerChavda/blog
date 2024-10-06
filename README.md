@@ -1,4 +1,4 @@
-# Blog (using laravel 10.0 || for begineer - intermediate) [Live](https://blog.gocoding.in)
+# Fully Functional Blog Project Built Using Laravel. [Check it out](https://blog.gocoding.in)
 
 ## Overview 
 
