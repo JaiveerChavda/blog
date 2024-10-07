@@ -7,7 +7,6 @@ use App\Events\PostPublished as EventsPostPublished;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
@@ -20,7 +19,7 @@ class AdminPostController extends Controller
 
         $is_admin = request()->user()?->can('admin');
 
-        $posts = $is_admin ? Post::latest()->paginate(50) : $user->posts ;
+        $posts = $is_admin ? Post::latest()->paginate(50) : $user->posts;
 
         return view('admin.posts.index', [
             'posts' => $posts,
@@ -29,8 +28,8 @@ class AdminPostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create',[
-            'categories' => Category::all(['id','name']),
+        return view('admin.posts.create', [
+            'categories' => Category::all(['id', 'name']),
         ]);
     }
 
@@ -43,10 +42,10 @@ class AdminPostController extends Controller
             $post = Post::create(array_merge(
                 $this->validatePost(),
                 [
-                'user_id' => request()->user()->id,
-                'thumbnail' =>  request()->file('thumbnail')->store('thumbnails'),
-                'status' => PostStatus::DRAFT->value,
-             ]
+                    'user_id' => request()->user()->id,
+                    'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
+                    'status' => PostStatus::DRAFT->value,
+                ]
             ));
 
             return Redirect::route('admin.posts.index')->with('success', 'post saved as draft');
@@ -55,11 +54,11 @@ class AdminPostController extends Controller
             $post = Post::create(array_merge(
                 $this->validatePost(),
                 [
-                'user_id' => request()->user()->id,
-                'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
-                'status' => PostStatus::PUBLISHED->value,
-                'published_at' => now(),
-            ]
+                    'user_id' => request()->user()->id,
+                    'thumbnail' => request()->file('thumbnail')->store('thumbnails'),
+                    'status' => PostStatus::PUBLISHED->value,
+                    'published_at' => now(),
+                ]
             ));
 
             event(new EventsPostPublished($post));
@@ -72,9 +71,9 @@ class AdminPostController extends Controller
     {
         //authorise that current user owns this post and is able to edit this post .
         //only admin and the author of the post can edit the post
-        if(request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
+        if (request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
             return view('admin.posts.edit', [
-                'authors' => User::all(['id','name']),
+                'authors' => User::all(['id', 'name']),
                 'post' => $post,
             ]);
 
@@ -88,21 +87,21 @@ class AdminPostController extends Controller
     {
         $attributes = $this->validatePost($post);
 
-        if($attributes['thumbnail'] ?? false) {
+        if ($attributes['thumbnail'] ?? false) {
             $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
         }
 
         $post->update($attributes);
 
-        if($attributes['status'] == PostStatus::PUBLISHED->value && $post->published_at == null) {
+        if ($attributes['status'] == PostStatus::PUBLISHED->value && $post->published_at == null) {
             $post->published_at = now();
             $post->save();
             event(new EventsPostPublished($post));
         }
 
         return redirect()
-                ->route('admin.posts.edit',['post' => $post->slug])
-                ->with('success', 'post updated');
+            ->route('admin.posts.edit', ['post' => $post->slug])
+            ->with('success', 'post updated');
     }
 
     public function destroy(Post $post)
@@ -110,9 +109,10 @@ class AdminPostController extends Controller
         //authorise that current user owns this post and is able to delete this post
         //only admin and the author of the post can delete the post
 
-        if(request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
+        if (request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
 
             $post->delete();
+
             return back()->with('success', 'post deleted!');
 
         }
@@ -127,12 +127,12 @@ class AdminPostController extends Controller
         $post ??= new Post();
 
         return request()->validate([
-            'title' => ['required'],
-            'slug' => ['required',Rule::unique('posts', 'slug')->ignore($post)],
-            'thumbnail' => $post->exists ? ['image'] : ['required','image'],
+            'title' => ['required', 'max:100'],
+            'slug' => ['required', 'max:120', Rule::unique('posts', 'slug')->ignore($post)],
+            'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
             'excerpt' => ['required'],
             'body' => ['required'],
-            'category_id' => ['required',Rule::exists('categories', 'id')],
+            'category_id' => ['required', Rule::exists('categories', 'id')],
             'status' => $post->exists ? ['required'] : ['nullable'],
         ]);
     }
