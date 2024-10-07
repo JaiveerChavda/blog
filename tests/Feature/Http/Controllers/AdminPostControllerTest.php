@@ -1,9 +1,11 @@
 <?php
 
+use App\Events\PostPublished;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
 
 pest()->group('admin_posts');
 
@@ -60,6 +62,8 @@ test('can see create post page', function () {
 
 test('can publish post', function () {
 
+    Event::fake();
+
     $category = Category::factory()->create(['name' => 'Laravel', 'slug' => 'laravel']);
     $image = UploadedFile::fake()->image('some-image.jpg');
 
@@ -86,7 +90,10 @@ test('can publish post', function () {
         ->assertViewHasAll(['posts'])
         ->assertSee('Test Title');
 
-});
+    // assert the an event was dispatched
+    Event::assertDispatched(PostPublished::class);
+
+})->group('publish_post');
 
 test('cannot create post with invalid data', function () {
     $response = login($this->user)
@@ -104,6 +111,8 @@ test('cannot create post with invalid data', function () {
 });
 
 test('can draft post', function () {
+
+    Event::fake();
 
     $category = Category::factory()->create(['name' => 'php', 'slug' => 'php']);
     $image = UploadedFile::fake()->image('some-image.jpg');
@@ -127,4 +136,7 @@ test('can draft post', function () {
         ->assertViewIs('admin.posts.index')
         ->assertSee('draft Title')
         ->assertSee('draft');
-});
+
+    Event::assertNotDispatched(PostPublished::class);
+
+})->group('draft_post');
