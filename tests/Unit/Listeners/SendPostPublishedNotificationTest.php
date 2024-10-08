@@ -5,10 +5,7 @@ use App\Listeners\SendPostPublishNotification;
 use App\Models\Post;
 use App\Models\User;
 use App\Notifications\PostPublished as NotificationsPostPublished;
-use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Notification;
-
-uses(TestCase::class);
 
 test('can send notification', function () {
     Notification::fake();
