@@ -7,6 +7,7 @@ use App\Events\PostPublished as EventsPostPublished;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 
@@ -79,7 +80,7 @@ class AdminPostController extends Controller
 
         }
 
-        abort(403, 'Your are not Authorized to perform this action');
+        abort(Response::HTTP_FORBIDDEN, 'Your are not Authorized to perform this action');
 
     }
 
@@ -113,7 +114,9 @@ class AdminPostController extends Controller
 
             $post->delete();
 
-            return back()->with('success', 'post deleted!');
+            return redirect()
+                ->route('admin.posts.index')
+                ->with('success', 'post deleted!');
 
         }
 
@@ -124,7 +127,7 @@ class AdminPostController extends Controller
     protected function validatePost(?Post $post = null)
     {
         //if post not passed in argument the create new post object
-        $post ??= new Post();
+        $post ??= new Post;
 
         return request()->validate([
             'title' => ['required', 'max:100'],
