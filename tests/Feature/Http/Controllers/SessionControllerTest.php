@@ -67,4 +67,15 @@ class SessionControllerTest extends TestCase
 
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
+
+    public function test_user_can_logout()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $this->post('/logout')
+            ->assertRedirect('/')
+            ->assertSessionHas('success','Goodbye!');
+    }
 }

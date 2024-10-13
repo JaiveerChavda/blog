@@ -31,6 +31,9 @@ Route::post('newsletter', NewsletterController::class);
 //guest routes
 Route::group(['middleware' => 'guest'], function () {
 
+    Route::get('login', [SessionController::class,'create'])->name('login');
+    Route::post('login', [SessionController::class,'store']);
+
     Route::get('/register', [RegisterController::class,'create'])->middleware('guest');
 
     Route::post('/register', [RegisterController::class,'store'])->middleware('guest');
@@ -42,15 +45,6 @@ Route::group(['middleware' => 'guest'], function () {
 
     // social login routes end
 });
-
-
-Route::post('/logout', [SessionController::class,'destroy']);
-
-Route::middleware('guest')->group(function () {
-    Route::get('login', [SessionController::class,'create'])->name('login');
-    Route::post('login', [SessionController::class,'store']);
-});
-
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('posts', AdminPostController::class)->except('show');
@@ -66,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('followings', [UserController::class,'followings'])->name('followings');
 
 
-    Route::resource('profile', ProfileController::class);
+    Route::resource('profile', ProfileController::class)->only(['index','edit','update']);
 
     Route::put('password', [PasswordController::class,'update'])->name('password.update');
 
@@ -74,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('bookmark', BookmarkPostController::class)->only(['index','store','destroy']);
 
+    Route::post('/logout', [SessionController::class,'destroy']);
 });
 
 // In routes/web.php
