@@ -133,8 +133,8 @@ class AdminPostController extends Controller
             'title' => ['required', 'max:100'],
             'slug' => ['required', 'max:120', Rule::unique('posts', 'slug')->ignore($post)],
             'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
-            'excerpt' => ['required'],
-            'body' => ['required'],
+            'excerpt' => ['required','min:10'],
+            'body' => ['required','min:10'],
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'status' => $post->exists ? ['required'] : ['nullable'],
         ]);

@@ -7,7 +7,6 @@
 .env
 .env.backup
 .env.production
-.env.testing
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
@@ -18,5 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 
+.env.testing
 
 /public/images
