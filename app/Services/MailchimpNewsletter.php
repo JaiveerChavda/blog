@@ -15,7 +15,12 @@ class MailchimpNewsletter implements Newsletter
     {
         $list ??= config('services.mailchimp.lists.subscribers');
 
-        return $this->client->lists->addListMember( $list,[
+        // generate md5 lowercase version of subscriber 
+        // email to use in setListMember function
+        
+        $subscriberHash = md5(strtolower($email)); 
+
+        return $this->client->lists->setListMember( $list, $subscriberHash,[
             'email_address' => $email,
             'status' => 'subscribed'
         ]);

@@ -21,10 +21,10 @@ class NewsletterController extends Controller
 
         try {
             $newsletter->subscribe(request('email'));
-        } catch(Exception $e) {
+        } catch(Exception $e) {            
             throw ValidationException::withMessages([
              'email' => 'please provide valid email for newsletter subscription.'
-        ]);
+            ])->redirectTo('/#newsletter');
         }
         return redirect('/')
             ->with('success', 'You have successfully subscribed to our newsletter list');
