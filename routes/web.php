@@ -24,8 +24,6 @@ Route::get('/', [PostController::class,'index'])->name('home');
 Route::get('/posts/{post}', [PostController::class,'show'])->name('post.show');
 Route::get('post-feed/{post}', [PostController::class,'showPostsFeed'])->name('post.show-feed');
 
-Route::post('/posts/{post:slug}/comments', [PostCommentController::class,'store']); //store post comment's
-
 Route::post('newsletter', NewsletterController::class);
 
 //guest routes
@@ -69,6 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('bookmark', BookmarkPostController::class)->only(['index','store','destroy']);
 
     Route::post('/logout', [SessionController::class,'destroy']);
+
+    Route::post('/posts/{post:slug}/comments', [PostCommentController::class,'store'])->name('post.comment'); //store post comment's
 });
 
 // In routes/web.php
