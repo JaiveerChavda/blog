@@ -18,7 +18,7 @@ describe('auth', function () {
 
     beforeEach(fn () => $this->actingAs($this->user));
 
-    test('can see bookmark posts page', function () {
+    test('can see bookmarked posts', function () {
 
         //create fake posts to bookmark them for current authenticated user.
 
