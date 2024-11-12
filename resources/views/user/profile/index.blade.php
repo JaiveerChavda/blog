@@ -19,7 +19,7 @@
                     </ul>
                 </div>
 
-                <img src="{{asset('storage/'.$user->avatar)}}" alt="profile-image" class="h-16 w-auto">
+                <img src="{{$user->avatar}}" alt="profile-image" class="h-16 w-auto">
                 {{-- <div class="user-profile-photo">
 
                 </div> --}}

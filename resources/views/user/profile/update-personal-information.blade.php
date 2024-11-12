@@ -9,7 +9,7 @@
 
     <x-forms.input name='avatar' type='file'/>
 
-    <img src="{{asset('storage/'.$user->avatar)}}" alt="profile-photo" class="h-24 rounded-2xl mt-4">
+    <img src="{{$user->avatar}}" alt="profile-photo" class="h-24 rounded-2xl mt-4">
 
     <x-forms.field>
         <x-forms.button >Save</x-forms.button>

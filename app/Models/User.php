@@ -3,10 +3,12 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -37,6 +39,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'bookmarked_posts' => 'array',
     ];
+
+    protected function avatar():Attribute
+    {
+        return Attribute::make(
+            get:function (mixed $value): ?string {
+                if (is_string($value)) {
+                    if(filter_var($value, FILTER_VALIDATE_URL)){
+                        return $value;
+                    }
+
+                    return Storage::disk('public')->url($value);
+                }               
+            }
+        );
+    }
 
     public function posts() //$user->posts
     {
