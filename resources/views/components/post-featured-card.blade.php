@@ -3,7 +3,7 @@
     <div class="py-6 px-5 lg:flex">
         <div class="flex-1 lg:mr-8">
             {{-- TO DO --}}
-            <img src="storage/{{ $post->thumbnail }}" alt="laracasts blog illustration-1" class="rounded-xl" >
+            <img src="{{ $post->thumbnail }}" alt="laracasts blog illustration-1" class="rounded-xl" >
         </div>
         <div class="flex-1 flex flex-col justify-between">
             <header class="mt-8">
