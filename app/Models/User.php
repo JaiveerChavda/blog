@@ -44,13 +44,15 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get:function (mixed $value): ?string {
-                if (is_string($value)) {
+                if (isset($value) && is_string($value)) {
                     if(filter_var($value, FILTER_VALIDATE_URL)){
                         return $value;
                     }
 
                     return Storage::disk('public')->url($value);
-                }               
+                }      
+                
+                return config('app.user.default_user_avatar');
             }
         );
     }

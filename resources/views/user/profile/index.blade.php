@@ -7,7 +7,7 @@
         {{-- user body content  --}}
         <div class="m-auto max-w-7xl">
 
-            <div class="max-w-md user-profile-container flex max-w-4xl justify-between gap-4 items-center">
+            <div class="max-w-md user-profile-container flex flex-col-reverse justify-between gap-8 items-center sm:items-start">
                 <div class="user-profile-information">
                     <h1 class="font-semibold text-2xl" style="letter-spacing: -1px">Your Profile</h1>
                     <hr class="my-4">
@@ -19,10 +19,8 @@
                     </ul>
                 </div>
 
-                <img src="{{$user->avatar}}" alt="profile-image" class="h-16 w-auto">
-                {{-- <div class="user-profile-photo">
-
-                </div> --}}
+                <img src="{{ $user->avatar }}" alt="profile-image" class="h-16 w-16 rounded-full">
+               
             </div>
 
         </div>

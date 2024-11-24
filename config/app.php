@@ -197,6 +197,10 @@ return [
 
     'app_admin_username' => env('APP_ADMIN_USERNAME'),
 
-    'pulse_admin_username' => env('PULSE_ADMIN_USERNAME')
+    'pulse_admin_username' => env('PULSE_ADMIN_USERNAME'),
+
+    'user' => [
+        'default_user_avatar' => env('DEFAULT_USER_AVATAR')
+    ]
 
 ];
