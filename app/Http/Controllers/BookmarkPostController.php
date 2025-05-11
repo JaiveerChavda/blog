@@ -53,16 +53,14 @@ class BookmarkPostController extends Controller
 
         $bookmarks = $user->bookmarked_posts;
 
-        if (($key = array_search($bookmark->id, $bookmarks)) !== false) {
-            unset($bookmarks[$key]); // Remove the post from bookmarks
+        $key = array_search($bookmark->id, $bookmarks);
 
-            $user->bookmarked_posts = array_values($bookmarks); // reindex array
+        unset($bookmarks[$key]); // Remove the post from bookmarks
 
-            $user->save();
+        $user->bookmarked_posts = array_values($bookmarks); // reindex array
 
-            return back()->with('success', 'post removed from reading list.');
-        }
+        $user->save();
 
-        return back()->with('error', 'Post not found in bookmarks.');
+        return back()->with('success', 'post removed from reading list.');
     }
 }
