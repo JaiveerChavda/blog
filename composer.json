@@ -9,7 +9,7 @@
         "doctrine/dbal": "^3.8",
         "guzzlehttp/guzzle": "^7.2",
         "itsgoingd/clockwork": "^5.1",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.15",
