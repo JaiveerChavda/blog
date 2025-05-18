@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+return new class() extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('author_followers', function (Blueprint $table) {
-            $table->primary(['author_id','user_id']);
-            $table->foreignId('author_id')->constrained('users','id');
+            $table->primary(['author_id', 'user_id']);
+            $table->foreignId('author_id')->constrained('users', 'id');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

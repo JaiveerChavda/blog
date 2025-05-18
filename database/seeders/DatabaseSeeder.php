@@ -8,7 +8,6 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
@@ -26,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         Schema::enableForeignKeyConstraints();
 
-        $user = User::factory()->create(['name'=>'jchavda','username'=>'jchavda','email' => 'jayveersinhchavda555@gmail.com']);
+        $user = User::factory()->create(['name' => 'jchavda', 'username' => 'jchavda', 'email' => 'jayveersinhchavda555@gmail.com']);
 
         Category::factory(8)->sequence(
             ['name' => 'Laravel'],
@@ -38,8 +37,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Java'],
             ['name' => 'Angular.js'],
         )->has(
-            Post::factory()->count(rand(2,5)))
-        ->create();
+            Post::factory()->count(rand(2, 5)))
+            ->create();
 
     }
 }

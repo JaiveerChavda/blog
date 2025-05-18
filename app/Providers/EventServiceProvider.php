@@ -27,7 +27,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         PostPublished::class => [
             SendPostPublishNotification::class,
-        ]
+        ],
     ];
 
     /**

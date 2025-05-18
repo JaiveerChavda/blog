@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class SessionController extends Controller
 {
@@ -23,13 +21,13 @@ class SessionController extends Controller
 
         return redirect()
             ->intended(RouteServiceProvider::HOME)
-            ->with('success','welcome back!');
+            ->with('success', 'welcome back!');
     }
 
     public function destroy()
     {
         auth()->logout();
 
-        return redirect('/')->with('success','Goodbye!');
+        return redirect('/')->with('success', 'Goodbye!');
     }
 }

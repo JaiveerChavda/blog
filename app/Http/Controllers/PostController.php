@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\PostViewed;
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -19,7 +15,7 @@ class PostController extends Controller
                 ->latest()
                 ->published()
                 ->filter(
-                    request(['search','category','author'])
+                    request(['search', 'category', 'author'])
                 )->paginate(6)
                 ->withQueryString(),
         ]);
@@ -27,7 +23,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        //show 404 response if post is in draft mode
+        // show 404 response if post is in draft mode
 
         abort_if($post->status == 'draft', 404);
 
@@ -39,7 +35,7 @@ class PostController extends Controller
 
         return view('posts.show', [
             'post' => $post,
-            'is_post_bookmarked' => $is_post_bookmarked
+            'is_post_bookmarked' => $is_post_bookmarked,
         ]);
     }
 
@@ -47,5 +43,4 @@ class PostController extends Controller
     {
         return $post;
     }
-
 }

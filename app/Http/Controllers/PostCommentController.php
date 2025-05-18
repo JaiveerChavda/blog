@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class PostCommentController extends Controller
 {
@@ -20,7 +19,7 @@ class PostCommentController extends Controller
             'user_id' => auth()->id(),
         ]);
 
-        return back()->with('success',__('posts.comment.messages.Comment posted successfully'));
+        return back()->with('success', __('posts.comment.messages.Comment posted successfully'));
 
     }
 }

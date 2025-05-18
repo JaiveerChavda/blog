@@ -191,7 +191,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value is used in Gate, for authorization of admin user
-    | so they can manage posts. 
+    | so they can manage posts.
     |
     */
 
@@ -200,7 +200,7 @@ return [
     'pulse_admin_username' => env('PULSE_ADMIN_USERNAME'),
 
     'user' => [
-        'default_user_avatar' => env('DEFAULT_USER_AVATAR')
-    ]
+        'default_user_avatar' => env('DEFAULT_USER_AVATAR'),
+    ],
 
 ];

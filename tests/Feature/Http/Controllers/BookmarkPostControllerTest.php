@@ -20,7 +20,7 @@ describe('auth', function () {
 
     test('can see bookmarked posts', function () {
 
-        //create fake posts to bookmark them for current authenticated user.
+        // create fake posts to bookmark them for current authenticated user.
 
         $posts = Post::factory(2)->create([
             'status' => PostStatus::PUBLISHED->value,

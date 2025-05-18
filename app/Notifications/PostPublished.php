@@ -15,10 +15,7 @@ class PostPublished extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Post $post)
-    {
-
-    }
+    public function __construct(public Post $post) {}
 
     /**
      * Get the notification's delivery channels.
@@ -37,11 +34,11 @@ class PostPublished extends Notification implements ShouldQueue
     {
         $url = url('/posts/'.$this->post->slug);
 
-        return (new MailMessage)
-                    ->greeting('Hello!')
-                    ->line($this->post->author->name.' has published a new post' )
-                    ->action('View Post', $url)
-                    ->line('Thank you for using '.env('APP_NAME'));
+        return (new MailMessage())
+            ->greeting('Hello!')
+            ->line($this->post->author->name.' has published a new post')
+            ->action('View Post', $url)
+            ->line('Thank you for using '.env('APP_NAME'));
     }
 
     /**

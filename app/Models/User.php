@@ -40,37 +40,37 @@ class User extends Authenticatable
         'bookmarked_posts' => 'array',
     ];
 
-    protected function avatar():Attribute
+    protected function avatar(): Attribute
     {
         return Attribute::make(
-            get:function (mixed $value): ?string {
+            get: function (mixed $value): ?string {
                 if (isset($value) && is_string($value)) {
-                    if(filter_var($value, FILTER_VALIDATE_URL)){
+                    if (filter_var($value, FILTER_VALIDATE_URL)) {
                         return $value;
                     }
 
                     return Storage::disk('public')->url($value);
-                }      
-                
+                }
+
                 return config('app.user.default_user_avatar');
             }
         );
     }
 
-    public function posts() //$user->posts
+    public function posts() // $user->posts
     {
         return $this->hasMany(Post::class);
     }
 
-    //get all the followers of the author
+    // get all the followers of the author
     public function followers()
     {
-        return $this->belongsToMany(User::class,'author_followers','author_id')->withTimestamps();
+        return $this->belongsToMany(User::class, 'author_followers', 'author_id')->withTimestamps();
     }
 
-    //get all the followings of a user (list of author a user follows)
+    // get all the followings of a user (list of author a user follows)
     public function followings()
     {
-        return $this->belongsToMany(User::class,'author_followers','user_id','author_id')->orderByPivot('created_at','desc');
+        return $this->belongsToMany(User::class, 'author_followers', 'user_id', 'author_id')->orderByPivot('created_at', 'desc');
     }
 }

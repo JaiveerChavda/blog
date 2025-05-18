@@ -4,8 +4,6 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Exceptions;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class SessionControllerTest extends TestCase
@@ -24,9 +22,9 @@ class SessionControllerTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->post('/login',[
+        $response = $this->post('/login', [
             'email' => $user->email,
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertValid();
@@ -76,6 +74,6 @@ class SessionControllerTest extends TestCase
 
         $this->post('/logout')
             ->assertRedirect('/')
-            ->assertSessionHas('success','Goodbye!');
+            ->assertSessionHas('success', 'Goodbye!');
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -12,6 +11,7 @@ class SocialLoginController extends Controller
     public function redirect()
     {
         $driver = request()->get('type');
+
         return Socialite::driver($driver)->redirect();
     }
 
@@ -21,13 +21,13 @@ class SocialLoginController extends Controller
 
         $socialUser = Socialite::driver($type)->user();
 
-        $type_id = $type . '_id';
+        $type_id = $type.'_id';
 
         $user = User::updateOrCreate([
             'email' => $socialUser->email,
         ], [
             $type_id => $socialUser->id,
-            'username' => explode(" ", $socialUser->name)[0],
+            'username' => explode(' ', $socialUser->name)[0],
             'name' => $socialUser->name,
             'email' => $socialUser->email,
             'avatar' => $socialUser->avatar,
@@ -39,6 +39,6 @@ class SocialLoginController extends Controller
 
         Auth::login($user);
 
-        return redirect('/')->with('success',"$type login successfull");
+        return redirect('/')->with('success', "$type login successfull");
     }
 }

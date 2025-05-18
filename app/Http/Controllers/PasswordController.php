@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 
@@ -20,6 +19,6 @@ class PasswordController extends Controller
             'password' => $validated['password'],
         ]);
 
-        return back()->with('success','password updated');
+        return back()->with('success', 'password updated');
     }
 }

@@ -13,11 +13,11 @@ test('can subscribe to newsletter', function () {
     // Bind the mock to the service container
     app()->instance(Newsletter::class, $newsletterMock);
 
-    $response = $this->post('/newsletter',[
-        'email' => 'jchavda@truptman.in'
+    $response = $this->post('/newsletter', [
+        'email' => 'jchavda@truptman.in',
     ]);
-    
+
     $response->assertValid()
-        ->assertRedirect('/')   
-        ->assertSessionHas('success','You have successfully subscribed to our newsletter list');
+        ->assertRedirect('/')
+        ->assertSessionHas('success', 'You have successfully subscribed to our newsletter list');
 });

@@ -35,7 +35,7 @@ return [
         'key' => env('MAILCHIMP_KEY'),
         'lists' => [
             'subscribers' => env('MAILCHIMP_LIST_SUBSCRIBERS'),
-        ]
+        ],
     ],
 
     // google oauth api keys.
@@ -43,5 +43,5 @@ return [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
-    ]
+    ],
 ];

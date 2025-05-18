@@ -43,7 +43,7 @@ dataset('post_data', [
 // admin can see posts of all users.
 test('can see posts', function () {
 
-    //create fake post written by other and admin users
+    // create fake post written by other and admin users
 
     Post::factory()->create([
         'status' => 'draft',

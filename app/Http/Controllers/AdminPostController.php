@@ -34,7 +34,7 @@ class AdminPostController extends Controller
         ]);
     }
 
-    //publish the given post
+    // publish the given post
 
     public function store()
     {
@@ -70,8 +70,8 @@ class AdminPostController extends Controller
 
     public function edit(Post $post)
     {
-        //authorise that current user owns this post and is able to edit this post .
-        //only admin and the author of the post can edit the post
+        // authorise that current user owns this post and is able to edit this post .
+        // only admin and the author of the post can edit the post
         if (request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
             return view('admin.posts.edit', [
                 'authors' => User::all(['id', 'name']),
@@ -107,8 +107,8 @@ class AdminPostController extends Controller
 
     public function destroy(Post $post)
     {
-        //authorise that current user owns this post and is able to delete this post
-        //only admin and the author of the post can delete the post
+        // authorise that current user owns this post and is able to delete this post
+        // only admin and the author of the post can delete the post
 
         if (request()->user()?->can('admin') == true || auth()->id() == $post->author->id) {
 
@@ -126,15 +126,15 @@ class AdminPostController extends Controller
 
     protected function validatePost(?Post $post = null)
     {
-        //if post not passed in argument the create new post object
-        $post ??= new Post;
+        // if post not passed in argument the create new post object
+        $post ??= new Post();
 
         return request()->validate([
             'title' => ['required', 'max:100'],
             'slug' => ['required', 'max:120', Rule::unique('posts', 'slug')->ignore($post)],
             'thumbnail' => $post->exists ? ['image'] : ['required', 'image'],
-            'excerpt' => ['required','min:10'],
-            'body' => ['required','min:10'],
+            'excerpt' => ['required', 'min:10'],
+            'body' => ['required', 'min:10'],
             'category_id' => ['required', Rule::exists('categories', 'id')],
             'status' => $post->exists ? ['required'] : ['nullable'],
         ]);

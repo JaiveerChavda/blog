@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\PostViewed;
 use App\Models\Post;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Session\Store;
 
 class IncrementPostViewCount
@@ -23,8 +21,7 @@ class IncrementPostViewCount
      */
     public function handle(PostViewed $event): void
     {
-        if(! $this->isPostViewed($event->post))
-        {
+        if (! $this->isPostViewed($event->post)) {
             $post = Post::findOrFail($event->post->id);
 
             $post->view_count += 1;
